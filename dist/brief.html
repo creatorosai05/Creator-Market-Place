@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Post a brief — CreatorMatch AI</title>
+<meta name="description" content="Describe your project in plain language. The AI brief generator structures it, estimates market price, flags risk, and ranks the creators who actually fit.">
+<meta name="theme-color" content="#07080c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%237c5cff'/%3E%3Ctext x='16' y='23' font-family='sans-serif' font-size='19' font-weight='700' text-anchor='middle' fill='%2306070b'%3EC%3C/text%3E%3C/svg%3E">
+</head>
+<body data-page="brief">
+<header class="nav" id="nav"></header>
+
+<main class="section-tight" style="padding-top:var(--sp-6)">
+  <div class="wrap">
+
+    <!-- Existing brief view -->
+    <div id="briefView" hidden></div>
+
+    <!-- Composer view -->
+    <div id="composerView">
+      <div class="mb-5">
+        <span class="eyebrow"><span class="dot"></span> AI brief generator</span>
+        <h1 class="mt-3" style="font-size:clamp(1.8rem,3.6vw,2.6rem)">Describe the work. We will structure it.</h1>
+        <p class="sub mt-3" style="max-width:66ch">Write two or three sentences the way you would brief a colleague. The generator detects the category, deliverable count, timeline, toolchain and complexity, then prices it against live marketplace data.</p>
+      </div>
+
+      <div class="split">
+        <div class="stack" style="gap:var(--sp-5)">
+          <!-- Step 1 -->
+          <section class="card" aria-labelledby="step1">
+            <div class="row mb-3" style="gap:9px">
+              <span class="brand-mark" style="width:24px;height:24px;font-size:.72rem;border-radius:7px">1</span>
+              <h2 id="step1" style="font-size:1.08rem">Your rough idea</h2>
+            </div>
+            <label class="field">
+              <span class="field-label">Project description</span>
+              <textarea class="textarea" id="rawBrief" rows="6" style="min-height:150px"
+                placeholder="Example: We are a D2C skincare brand launching three new products next month. We need 12 Instagram reels in Hindi and English with strong hooks, plus a landing page rewrite. Previous campaigns plateaued at 1.8x ROAS."></textarea>
+              <span class="field-hint"><span id="wordCount">0</span> words · nothing is sent anywhere, all analysis runs in your browser</span>
+            </label>
+            <div class="row mt-3" id="examples" style="gap:6px"></div>
+            <div class="row mt-4" style="gap:var(--sp-3)">
+              <button class="btn btn-primary" id="analyseBtn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v5M12 16v5M3 12h5M16 12h5M6.5 6.5l3 3M14.5 14.5l3 3M17.5 6.5l-3 3M9.5 14.5l-3 3"/></svg>
+                Analyse with AI
+              </button>
+              <button class="btn btn-ghost" id="resetBtn" type="button">Clear</button>
+            </div>
+          </section>
+
+          <!-- Step 2: structured output -->
+          <section class="ai-panel" id="structuredPanel" hidden aria-labelledby="step2">
+            <div class="row mb-3" style="gap:9px">
+              <span class="brand-mark" style="width:24px;height:24px;font-size:.72rem;border-radius:7px">2</span>
+              <h2 id="step2" style="font-size:1.08rem">Structured brief</h2>
+              <span class="badge badge-ai" style="margin-left:auto">AI generated</span>
+            </div>
+            <div class="row mb-4" style="gap:8px">
+              <span class="chip chip-mint" id="confidenceChip">Confidence</span>
+              <span class="chip" id="catChip">Category</span>
+            </div>
+            <form id="briefForm" class="stack" style="gap:var(--sp-4)">
+              <label class="field">
+                <span class="field-label">Brief title</span>
+                <input class="input" id="bTitle" required maxlength="120">
+              </label>
+              <div class="form-grid">
+                <label class="field">
+                  <span class="field-label">Category</span>
+                  <select class="select" id="bCategory"></select>
+                </label>
+                <label class="field">
+                  <span class="field-label">Language</span>
+                  <select class="select" id="bLanguage"></select>
+                </label>
+                <label class="field">
+                  <span class="field-label">Quantity</span>
+                  <input class="input" id="bQuantity" type="number" min="1" max="500" value="1">
+                </label>
+                <label class="field">
+                  <span class="field-label">Deadline (days)</span>
+                  <input class="input" id="bDeadline" type="number" min="1" max="180" value="14">
+                </label>
+                <label class="field">
+                  <span class="field-label">Budget floor (₹)</span>
+                  <input class="input" id="bBudgetMin" type="number" min="500" step="500" value="5000">
+                </label>
+                <label class="field">
+                  <span class="field-label">Budget ceiling (₹)</span>
+                  <input class="input" id="bBudgetMax" type="number" min="500" step="500" value="25000">
+                </label>
+                <label class="field span-2">
+                  <span class="field-label">Your brand</span>
+                  <input class="input" id="bBrand" placeholder="e.g. Sip Society" maxlength="60">
+                </label>
+                <label class="field span-2">
+                  <span class="field-label">Commercial-Use License Requirements</span>
+                  <select class="select" id="bCommercialLicense">
+                    <option value="Full Commercial License (Organic, Ads & Digital)">Full Commercial License (Organic, Ads & Digital)</option>
+                    <option value="Exclusive Commercial Buyout (Master Assets Included)">Exclusive Commercial Buyout (Master Assets Included)</option>
+                    <option value="Non-Exclusive Digital Distribution">Non-Exclusive Digital Distribution</option>
+                  </select>
+                </label>
+                <label class="row span-2" style="gap:8px;align-items:center;cursor:pointer">
+                  <input type="checkbox" id="bCommercialStrict" checked>
+                  <span style="font-size:.87rem">Strict Commercial Clearance: Exclude unverified creators from top match recommendation</span>
+                </label>
+              </div>
+              <div>
+                <span class="field-label">Deliverables the AI detected</span>
+                <div class="row" id="bDeliverables" style="gap:5px"></div>
+              </div>
+              <div>
+                <span class="field-label">Detected signals</span>
+                <div class="row" id="bSignals" style="gap:5px"></div>
+              </div>
+              <label class="field">
+                <span class="field-label">Full description sent to creators</span>
+                <textarea class="textarea" id="bDescription" rows="4"></textarea>
+              </label>
+            </form>
+            <div class="row mt-4" style="gap:var(--sp-3)">
+              <button class="btn btn-primary" id="postBtn">Post brief &amp; find matches</button>
+              <button class="btn btn-ghost" id="reAnalyse">Re-analyse</button>
+            </div>
+          </section>
+
+          <!-- Step 3: matches -->
+          <section id="matchesSection" hidden>
+            <div class="row-between mb-4" style="align-items:flex-end">
+              <div>
+                <span class="eyebrow eyebrow-violet">Step 3</span>
+                <h2 class="mt-2" id="matchesHeading" style="font-size:1.3rem">Ranked matches</h2>
+                <p class="sub mt-2" style="max-width:58ch">Every score is decomposed. Open a card to see the seven factors behind it.</p>
+              </div>
+              <select class="select" id="matchMin" aria-label="Minimum match score" style="max-width:190px">
+                <option value="0">All matches</option>
+                <option value="55">55+ only</option>
+                <option value="70" selected>70+ only</option>
+                <option value="85">85+ only</option>
+              </select>
+            </div>
+            <div class="stack" id="matches" style="gap:var(--sp-4)"></div>
+          </section>
+        </div>
+
+        <!-- Sticky AI sidebar -->
+        <aside class="stack" style="gap:var(--sp-4);position:sticky;top:82px">
+          <div class="ai-panel card-pad-sm" id="pricePanel">
+            <span class="eyebrow">Market price estimate</span>
+            <div class="num mt-3" style="font-size:1.9rem" id="priceSuggested">—</div>
+            <div class="tiny" id="priceRange">Run an analysis to price your brief</div>
+            <div class="mt-4" id="priceBars"></div>
+            <details class="mt-4" style="border-top:1px solid var(--line);padding-top:var(--sp-3)">
+              <summary class="tiny" style="cursor:pointer;color:var(--muted)">How this was calculated</summary>
+              <ul class="mt-3" id="priceRationale" style="padding-left:18px;font-size:.8rem;color:var(--muted);line-height:1.6"></ul>
+            </details>
+          </div>
+
+          <div class="card card-pad-sm" id="riskPanel">
+            <div class="row" style="gap:8px">
+              <span id="riskIcon"></span>
+              <h3 style="font-size:.95rem">Trust &amp; risk check</h3>
+            </div>
+            <div id="riskBody" class="mt-3"><p class="tiny">Analysed once you run the AI.</p></div>
+          </div>
+
+          <div class="card card-pad-sm">
+            <h3 style="font-size:.95rem">Writing a stronger brief</h3>
+            <ul class="mt-3" style="padding-left:17px;font-size:.82rem;color:var(--muted);line-height:1.75">
+              <li>Name the quantity — "12 reels" beats "some reels"</li>
+              <li>State the platform and the language</li>
+              <li>Give a real deadline, not "asap"</li>
+              <li>Mention tools you require or want to avoid</li>
+              <li>Share the metric you are trying to move</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer" id="footer"></footer>
+
+<script src="assets/js/vendor/supabase.js"></script>
+<script src="assets/js/supabase.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/ai.js"></script>
+<script src="assets/js/store.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/pages/brief.js"></script>
+</body>
+</html>

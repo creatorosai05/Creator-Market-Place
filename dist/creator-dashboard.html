@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Creator Studio — CreatorMatch AI</title>
+<meta name="description" content="The seller side of the marketplace: incoming orders, an AI pricing advisor benchmarked against comparable listings, and quality-score breakdown.">
+<meta name="theme-color" content="#07080c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%237c5cff'/%3E%3Ctext x='16' y='23' font-family='sans-serif' font-size='19' font-weight='700' text-anchor='middle' fill='%2306070b'%3EC%3C/text%3E%3C/svg%3E">
+</head>
+<body data-page="creator-dashboard">
+<header class="nav" id="nav"></header>
+
+<main class="section-tight" style="padding-top:var(--sp-6)">
+  <div class="wrap">
+    <div class="row-between mb-5" style="align-items:flex-end">
+      <div>
+        <span class="eyebrow eyebrow-violet">Seller side</span>
+        <h1 class="mt-2" style="font-size:clamp(1.7rem,3.4vw,2.4rem)">Creator Studio</h1>
+        <p class="sub mt-2" style="max-width:60ch">Pick any creator account to see their order book, earnings and the pricing advisor benchmarked against comparable listings.</p>
+      </div>
+      <label class="field" style="min-width:250px">
+        <span class="field-label">Viewing as</span>
+        <select class="select" id="creatorSelect" aria-label="Select creator account"></select>
+      </label>
+    </div>
+
+    <div id="studioHeader" class="mb-5"></div>
+
+    <div class="grid g-4 mb-5" id="studioStats"></div>
+
+    <div class="tabs mb-4" role="tablist" aria-label="Creator studio sections">
+      <button class="tab" role="tab" id="tab-orders" aria-controls="panel-orders" aria-selected="true" data-tab="orders">Incoming orders</button>
+      <button class="tab" role="tab" id="tab-pricing" aria-controls="panel-pricing" aria-selected="false" data-tab="pricing">AI pricing advisor</button>
+      <button class="tab" role="tab" id="tab-listings" aria-controls="panel-listings" aria-selected="false" data-tab="listings">My listings</button>
+      <button class="tab" role="tab" id="tab-quality" aria-controls="panel-quality" aria-selected="false" data-tab="quality">Quality score</button>
+      <button class="tab" role="tab" id="tab-portfolio" aria-controls="panel-portfolio" aria-selected="false" data-tab="portfolio">Portfolio &amp; Verification</button>
+    </div>
+
+    <section id="panel-orders" role="tabpanel" aria-labelledby="tab-orders" tabindex="0"><div id="ordersBody"></div></section>
+    <section id="panel-pricing" role="tabpanel" aria-labelledby="tab-pricing" tabindex="0" hidden><div id="pricingBody"></div></section>
+    <section id="panel-listings" role="tabpanel" aria-labelledby="tab-listings" tabindex="0" hidden><div id="listingsBody"></div></section>
+    <section id="panel-quality" role="tabpanel" aria-labelledby="tab-quality" tabindex="0" hidden><div id="qualityBody"></div></section>
+    <section id="panel-portfolio" role="tabpanel" aria-labelledby="tab-portfolio" tabindex="0" hidden><div id="portfolioBody"></div></section>
+  </div>
+</main>
+
+<footer class="footer" id="footer"></footer>
+
+<script src="assets/js/vendor/supabase.js"></script>
+<script src="assets/js/supabase.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/ai.js"></script>
+<script src="assets/js/store.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/pages/creator-dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CreatorMatch AI — Hire AI-native content creators</title>
+<meta name="description" content="A marketplace connecting brands with AI-native content creators. Post a brief and get explainable AI matches, or browse verified creators by category, toolchain and budget.">
+<meta name="theme-color" content="#07080c">
+<meta property="og:title" content="CreatorMatch AI — AI Content Creator Marketplace">
+<meta property="og:description" content="Brands post a brief, an explainable matching engine finds the right AI-native creator.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%237c5cff'/%3E%3Ctext x='16' y='23' font-family='sans-serif' font-size='19' font-weight='700' text-anchor='middle' fill='%2306070b'%3EC%3C/text%3E%3C/svg%3E">
+</head>
+<body data-page="home">
+<header class="nav" id="nav"></header>
+
+<main>
+  <!-- Working surface first: search + immediate results -->
+  <section class="section-tight" style="padding-top:var(--sp-6)">
+    <div class="wrap">
+      <div class="row-between" style="align-items:flex-end;gap:var(--sp-5)">
+        <div style="max-width:60ch">
+          <span class="eyebrow"><span class="dot"></span> 18 verified AI-native creators · 34 live listings</span>
+          <h1 class="mt-3">Find the creator whose <span class="grad-text">AI stack</span> fits your brief</h1>
+          <p class="sub mt-3">Describe the work in plain language. The matching engine scores every creator on category, toolchain, budget, reputation and capacity — and shows you exactly why.</p>
+        </div>
+        <a class="btn btn-ghost" href="insights.html">Marketplace insights</a>
+      </div>
+
+      <form id="searchForm" class="card mt-5" style="padding:var(--sp-4)" role="search">
+        <div class="row" style="gap:var(--sp-3);flex-wrap:nowrap">
+          <div class="input-group grow">
+            <span class="input-group-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span>
+            <input class="input" id="searchInput" type="search" name="q" autocomplete="off"
+              placeholder="Try: 8 AI reels for a D2C skincare launch, Hindi + English"
+              aria-label="Search creators, skills or tools">
+          </div>
+          <select class="select" id="searchCategory" aria-label="Filter by category" style="max-width:220px">
+            <option value="">All categories</option>
+          </select>
+          <button class="btn btn-primary" type="submit">Search</button>
+        </div>
+        <div class="row mt-3" id="quickSearches" style="gap:6px"></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Live results -->
+  <section class="section-tight" id="resultsSection" hidden>
+    <div class="wrap">
+      <div class="row-between mb-4">
+        <div>
+          <span class="eyebrow eyebrow-violet">Live results</span>
+          <h2 class="mt-2" id="resultsTitle" style="font-size:1.4rem">Results</h2>
+        </div>
+        <button class="btn btn-ghost btn-sm" id="clearSearch">Clear</button>
+      </div>
+      <div class="grid g-auto" id="searchResults"></div>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="section" id="categories">
+    <div class="wrap">
+      <div class="row-between mb-4" style="align-items:flex-end">
+        <div>
+          <span class="eyebrow">Categories</span>
+          <h2 class="mt-2">Ten ways brands buy AI content</h2>
+        </div>
+        <a class="btn btn-ghost btn-sm" href="creators.html">Browse all creators</a>
+      </div>
+      <div class="grid g-auto" id="categoryGrid"></div>
+    </div>
+  </section>
+
+  <!-- Trending gigs -->
+  <section class="section-tight" id="trending">
+    <div class="wrap">
+      <div class="row-between mb-4" style="align-items:flex-end">
+        <div>
+          <span class="eyebrow">Highest demand</span>
+          <h2 class="mt-2">Trending listings this week</h2>
+          <p class="sub mt-2" style="max-width:58ch">Ranked by order velocity, not by who paid for placement.</p>
+        </div>
+        <a class="btn btn-ghost btn-sm" href="creators.html?sort=trending">See all</a>
+      </div>
+      <div class="grid g-3" id="trendingGrid"></div>
+    </div>
+  </section>
+
+  <!-- Top creators -->
+  <section class="section" id="topCreators">
+    <div class="wrap">
+      <div class="row-between mb-4" style="align-items:flex-end">
+        <div>
+          <span class="eyebrow eyebrow-violet">Quality score</span>
+          <h2 class="mt-2">Top-rated creators right now</h2>
+          <p class="sub mt-2" style="max-width:60ch">Composite of buyer rating, order volume, on-time delivery, repeat-client rate and response speed.</p>
+        </div>
+        <a class="btn btn-ghost btn-sm" href="creators.html?sort=quality">Full ranking</a>
+      </div>
+      <div class="grid g-3" id="creatorGrid"></div>
+    </div>
+  </section>
+
+  <!-- Open briefs -->
+  <section class="section-tight" id="briefs">
+    <div class="wrap">
+      <div class="row-between mb-4" style="align-items:flex-end">
+        <div>
+          <span class="eyebrow">Demand side</span>
+          <h2 class="mt-2">Open briefs from brands</h2>
+          <p class="sub mt-2" style="max-width:58ch">Creators apply with a scoped proposal. Brands see AI-ranked applicants.</p>
+        </div>
+        <a class="btn btn-primary btn-sm" href="brief.html">Post a brief</a>
+      </div>
+      <div class="grid g-3" id="briefGrid"></div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="section" id="how">
+    <div class="wrap">
+      <div class="ai-panel">
+        <span class="eyebrow">How the matching works</span>
+        <h2 class="mt-3">No black box. Every match comes with its maths.</h2>
+        <div class="grid g-4 mt-5" id="howGrid"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer" id="footer"></footer>
+
+<script src="assets/js/vendor/supabase.js"></script>
+<script src="assets/js/supabase.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/ai.js"></script>
+<script src="assets/js/store.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/pages/home.js"></script>
+</body>
+</html>

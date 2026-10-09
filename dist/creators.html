@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Browse AI content creators — CreatorMatch AI</title>
+<meta name="description" content="Filter 18 verified AI-native content creators by category, toolchain, budget, language, niche and delivery time. Ranked by quality score or AI relevance.">
+<meta name="theme-color" content="#07080c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%237c5cff'/%3E%3Ctext x='16' y='23' font-family='sans-serif' font-size='19' font-weight='700' text-anchor='middle' fill='%2306070b'%3EC%3C/text%3E%3C/svg%3E">
+</head>
+<body data-page="creators">
+<header class="nav" id="nav"></header>
+
+<main class="section-tight" style="padding-top:var(--sp-6)">
+  <div class="wrap">
+    <div class="row-between mb-4" style="align-items:flex-end">
+      <div>
+        <span class="eyebrow">Marketplace</span>
+        <h1 class="mt-2" style="font-size:clamp(1.7rem,3.4vw,2.4rem)">Browse creators</h1>
+        <p class="sub mt-2" id="resultCount" style="max-width:56ch">Filter by what actually matters: the tools they use, what they charge, and how reliably they ship.</p>
+      </div>
+      <button class="btn btn-ghost btn-sm" id="resetFilters">Reset filters</button>
+    </div>
+
+    <div class="split">
+      <!-- Results -->
+      <div>
+        <div class="card card-flat card-pad-sm mb-4">
+          <div class="row" style="gap:var(--sp-3)">
+            <div class="input-group grow">
+              <span class="input-group-icon" id="searchIcon"></span>
+              <input class="input" id="q" type="search" placeholder="Search name, skill, tool or niche…" aria-label="Search creators" autocomplete="off">
+            </div>
+            <select class="select" id="sort" aria-label="Sort results" style="max-width:210px">
+              <option value="relevance">Sort: AI relevance</option>
+              <option value="quality">Sort: Quality score</option>
+              <option value="rating">Sort: Buyer rating</option>
+              <option value="price-low">Sort: Price, low to high</option>
+              <option value="price-high">Sort: Price, high to low</option>
+              <option value="fastest">Sort: Fastest delivery</option>
+              <option value="orders">Sort: Most orders</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid g-2" id="results"></div>
+      </div>
+
+      <!-- Filters -->
+      <aside class="card card-flat" style="position:sticky;top:82px" aria-label="Filters">
+        <div class="row" style="gap:8px;margin-bottom:var(--sp-4)">
+          <span id="filterIcon"></span>
+          <h3 style="font-size:1rem">Filters</h3>
+          <span class="chip chip-violet" id="activeCount" style="margin-left:auto">0 active</span>
+        </div>
+
+        <div class="stack" style="gap:var(--sp-5)">
+          <div>
+            <span class="field-label">Category</span>
+            <div class="row" id="fCategory" style="gap:5px"></div>
+          </div>
+
+          <div>
+            <span class="field-label" id="budgetLabel">Max starting price</span>
+            <input class="range" type="range" id="fBudget" min="2000" max="60000" step="1000" value="60000" aria-describedby="budgetLabel">
+            <div class="spread mt-2"><span class="tiny">₹2k</span><span class="mono text-mint" id="budgetValue">Any</span></div>
+          </div>
+
+          <div>
+            <span class="field-label" id="deliveryLabel">Delivers within</span>
+            <input class="range" type="range" id="fDelivery" min="1" max="10" step="1" value="10" aria-describedby="deliveryLabel">
+            <div class="spread mt-2"><span class="tiny">1 day</span><span class="mono text-mint" id="deliveryValue">Any</span></div>
+          </div>
+
+          <div>
+            <span class="field-label" id="ratingLabel">Minimum rating</span>
+            <input class="range" type="range" id="fRating" min="4" max="5" step="0.1" value="4" aria-describedby="ratingLabel">
+            <div class="spread mt-2"><span class="tiny">4.0</span><span class="mono text-mint" id="ratingValue">4.0+</span></div>
+          </div>
+
+          <div>
+            <span class="field-label">AI tools</span>
+            <div class="row" id="fTools" style="gap:5px"></div>
+          </div>
+
+          <div>
+            <span class="field-label">Industry niche</span>
+            <div class="row" id="fNiche" style="gap:5px"></div>
+          </div>
+
+          <div>
+            <span class="field-label">Language</span>
+            <div class="row" id="fLang" style="gap:5px"></div>
+          </div>
+
+          <div class="stack" style="gap:9px;padding-top:var(--sp-3);border-top:1px solid var(--line)">
+            <label class="check"><input type="checkbox" id="fVerified"> Verified identity only</label>
+            <label class="check"><input type="checkbox" id="fOnline"> Online now</label>
+            <label class="check"><input type="checkbox" id="fSaved"> My shortlist</label>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<footer class="footer" id="footer"></footer>
+
+<script src="assets/js/vendor/supabase.js"></script>
+<script src="assets/js/supabase.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/ai.js"></script>
+<script src="assets/js/store.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/pages/creators.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My orders — CreatorMatch AI</title>
+<meta name="description" content="Client workspace: track escrow-protected orders, manage posted briefs and review your creator shortlist.">
+<meta name="theme-color" content="#07080c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%237c5cff'/%3E%3Ctext x='16' y='23' font-family='sans-serif' font-size='19' font-weight='700' text-anchor='middle' fill='%2306070b'%3EC%3C/text%3E%3C/svg%3E">
+</head>
+<body data-page="dashboard">
+<header class="nav" id="nav"></header>
+
+<main class="section-tight" style="padding-top:var(--sp-6)">
+  <div class="wrap">
+    <div class="row-between mb-5" style="align-items:flex-end">
+      <div>
+        <span class="eyebrow">Client workspace</span>
+        <h1 class="mt-2" style="font-size:clamp(1.7rem,3.4vw,2.4rem)" id="brandTitle">Your workspace</h1>
+        <p class="sub mt-2">Orders, briefs and shortlist. Saved on this device so the demo keeps state between visits.</p>
+      </div>
+      <div class="row" style="gap:8px">
+        <button class="btn btn-ghost btn-sm" id="editBrand">Edit brand</button>
+        <a class="btn btn-primary btn-sm" href="brief.html">Post a brief</a>
+      </div>
+    </div>
+
+    <div class="grid g-4 mb-5" id="stats"></div>
+
+    <div class="tabs mb-4" role="tablist" aria-label="Workspace sections">
+      <button class="tab" role="tab" id="tab-orders" aria-controls="panel-orders" aria-selected="true" data-tab="orders">Orders</button>
+      <button class="tab" role="tab" id="tab-briefs" aria-controls="panel-briefs" aria-selected="false" data-tab="briefs">My briefs</button>
+      <button class="tab" role="tab" id="tab-saved" aria-controls="panel-saved" aria-selected="false" data-tab="saved">Shortlist</button>
+    </div>
+
+    <section id="panel-orders" role="tabpanel" aria-labelledby="tab-orders" tabindex="0">
+      <div id="ordersBody"></div>
+    </section>
+
+    <section id="panel-briefs" role="tabpanel" aria-labelledby="tab-briefs" tabindex="0" hidden>
+      <div id="briefsBody"></div>
+    </section>
+
+    <section id="panel-saved" role="tabpanel" aria-labelledby="tab-saved" tabindex="0" hidden>
+      <div id="savedBody"></div>
+    </section>
+  </div>
+</main>
+
+<footer class="footer" id="footer"></footer>
+
+<script src="assets/js/vendor/supabase.js"></script>
+<script src="assets/js/supabase.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/ai.js"></script>
+<script src="assets/js/store.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/pages/dashboard.js"></script>
+</body>
+</html>
