@@ -306,7 +306,7 @@
       actions: [
         { label: "Cancel" },
         {
-          label: `Place order · ${UI.money(total())}`, variant: "primary",
+          label: `Pay & Place Order · ${UI.money(total())}`, variant: "primary",
           onClick: () => {
             const brandName = $("#coBrand").value.trim();
             const briefText = $("#coBrief").value.trim();
@@ -318,8 +318,32 @@
               brief: briefText, brand: brandName, dueDays: +$("#coDue").value
             });
             Store.setBrand({ name: brandName });
-            UI.toast(`Order placed with ${creator.name}`, "ok");
-            setTimeout(() => confirmSuccess(order), 220);
+
+            if (typeof window.Razorpay === "function") {
+              const options = {
+                key: "rzp_test_TlxOIWifYqxJeK",
+                amount: Math.round(order.total * 100),
+                currency: "INR",
+                name: "CreatorOS AI Marketplace",
+                description: `Escrow Fund for Order ${order.id} (${gig.title})`,
+                handler: function (response) {
+                  UI.toast(`Payment verified! ID: ${response.razorpay_payment_id}`, "ok");
+                  setTimeout(() => confirmSuccess(order), 220);
+                },
+                prefill: {
+                  name: brandName,
+                  email: "brand@growthos.market",
+                },
+                theme: {
+                  color: "#00f0ff"
+                }
+              };
+              const rzp = new window.Razorpay(options);
+              rzp.open();
+            } else {
+              UI.toast(`Order placed with ${creator.name}`, "ok");
+              setTimeout(() => confirmSuccess(order), 220);
+            }
           }
         }
       ]

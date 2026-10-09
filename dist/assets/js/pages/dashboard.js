@@ -57,6 +57,20 @@
       </div>`;
 
     $$("[data-advance]").forEach((b) => b.addEventListener("click", () => {
+      const current = Store.order(b.dataset.advance);
+      if (current && current.status === "review") {
+        UI.confirmDialog({
+          title: "Release Escrow Payment?",
+          confirmLabel: `Release ${UI.money(current.total)}`,
+          body: `Confirm that you are satisfied with the creator's delivery. Escrow funds will be settled with ${UI.esc(current.creatorName)} via Razorpay.`,
+          onConfirm: () => {
+            const o = Store.advanceOrder(current.id);
+            UI.toast("Delivery approved — escrow released via Razorpay!", "ok");
+            refresh();
+          }
+        });
+        return;
+      }
       const o = Store.advanceOrder(b.dataset.advance);
       UI.toast(o.status === "delivered" ? "Delivery approved — escrow released" : `Moved to “${Store.statusLabel(o.status)}”`, "ok");
       refresh();
