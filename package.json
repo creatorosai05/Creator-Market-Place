@@ -5,8 +5,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node dev/server.mjs",
-    "build": "node dev/build.mjs",
+    "dev": "npm --prefix creatoros-ai run dev",
+    "dev:next": "npm --prefix creatoros-ai run dev",
+    "dev:static": "node dev/server.mjs",
+    "build": "npm --prefix creatoros-ai run build",
+    "build:static": "node dev/build.mjs",
     "test": "node --test dev/*.test.mjs dev/handler-fix.mjs",
     "lint": "node dev/lint.mjs",
     "typecheck": "tsc --noEmit",
