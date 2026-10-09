@@ -17,6 +17,9 @@ credentials*
 .vercel/
 dist/assets/js/vendor/
 *.log
+.next/
+out/
+creatoros-ai/.next/
 
 # System files
 .DS_Store
