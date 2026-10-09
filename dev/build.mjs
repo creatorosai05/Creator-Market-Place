@@ -59,7 +59,12 @@ const pages = [
   'brief.html',
   'dashboard.html',
   'gig.html',
-  'insights.html'
+  'insights.html',
+  'creator-profile.html',
+  'brand-profile.html',
+  'profile.html',
+  'login.html',
+  'signup.html'
 ];
 
 let allValid = true;
