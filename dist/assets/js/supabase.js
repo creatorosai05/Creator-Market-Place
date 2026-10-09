@@ -4,8 +4,8 @@
    ============================================================ */
 
 const SupabaseBridge = (() => {
-  const SUPABASE_URL = "https://jmtjvewghozmsfecyygj.supabase.co";
-  const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_WKtUvZOoM9PM2fdrh4LCXw_VEACxfVa";
+  const SUPABASE_URL = "__SUPABASE_URL__";
+  const SUPABASE_PUBLISHABLE_KEY = "__SUPABASE_PUBLISHABLE_KEY__";
 
   let client = null;
   let currentUser = null;
