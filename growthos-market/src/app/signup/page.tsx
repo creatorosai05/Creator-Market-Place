@@ -47,9 +47,9 @@ export default function SignUpPage() {
       localStorage.setItem("creatoros_demo_user", JSON.stringify(userProfile));
 
       if (role === "creator") {
-        router.push("/dashboard/creator");
+        router.push("/profile/creator");
       } else {
-        router.push("/dashboard/brand");
+        router.push("/profile/brand");
       }
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : "Registration failed";

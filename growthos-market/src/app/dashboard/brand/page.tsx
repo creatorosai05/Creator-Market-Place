@@ -1,12 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import PostBriefModal from "@/components/PostBriefModal";
 import FeedbackModal from "@/components/FeedbackModal";
 import RazorpayCheckout from "@/components/RazorpayCheckout";
 import {
   Briefcase,
+  Building,
   Plus,
   Clock,
   CheckCircle,
@@ -181,13 +183,22 @@ export default function BrandDashboard() {
             </div>
           </div>
 
-          <button
-            onClick={() => setIsPostBriefOpen(true)}
-            className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-slate-950 font-bold text-xs flex items-center gap-2 shadow-lg shadow-cyan-500/25 transition-all"
-          >
-            <Plus className="w-4 h-4" />
-            Post New Brief
-          </button>
+          <div className="flex items-center gap-3">
+            <Link
+              href="/profile/brand"
+              className="px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-bold text-xs flex items-center gap-2 transition-all hover:scale-[1.02]"
+            >
+              <Building className="w-4 h-4 text-cyan-400" />
+              Manage Brand Profile
+            </Link>
+            <button
+              onClick={() => setIsPostBriefOpen(true)}
+              className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-slate-950 font-bold text-xs flex items-center gap-2 shadow-lg shadow-cyan-500/25 transition-all"
+            >
+              <Plus className="w-4 h-4" />
+              Post New Brief
+            </button>
+          </div>
         </div>
 
         {/* Quick KPI Row */}

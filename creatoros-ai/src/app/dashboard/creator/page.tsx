@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import ProposalModal from "@/components/ProposalModal";
 import {
@@ -16,6 +17,7 @@ import {
   FileCheck,
   Sparkles,
   Link as LinkIcon,
+  User,
 } from "lucide-react";
 
 interface Brief {
@@ -152,6 +154,15 @@ export default function CreatorDashboard() {
                 Explore briefs tailored to your AI workflow, submit pitches, and deliver milestone assets.
               </p>
             </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <Link
+              href="/profile/creator"
+              className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-fuchsia-600 to-indigo-600 hover:from-fuchsia-500 hover:to-indigo-500 text-white font-bold text-xs flex items-center gap-2 shadow-lg shadow-fuchsia-500/20 transition-all hover:scale-[1.02]"
+            >
+              <User className="w-4 h-4" />
+              Manage Creator Profile & Portfolio
+            </Link>
           </div>
         </div>
 

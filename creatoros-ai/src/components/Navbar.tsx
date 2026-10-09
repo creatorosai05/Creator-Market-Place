@@ -71,6 +71,9 @@ export default function Navbar() {
             <Zap className="w-4 h-4 text-fuchsia-400" />
             Creator Studio
           </Link>
+          <Link href="/profile" className="hover:text-cyan-400 transition-colors">
+            My Profile
+          </Link>
         </nav>
 
         {/* Auth / Account Controls */}
@@ -78,13 +81,20 @@ export default function Navbar() {
           {loading ? (
             <div className="w-20 h-8 rounded-lg bg-white/5 animate-pulse" />
           ) : user ? (
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2.5">
+              <Link
+                href={user.role === "creator" ? "/profile/creator" : "/profile/brand"}
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-xs font-semibold text-cyan-300 transition-colors"
+                title="Manage your profile"
+              >
+                <User className="w-3.5 h-3.5" />
+                <span>{user.role === "creator" ? "Creator Profile" : "Brand Profile"}</span>
+              </Link>
               <Link
                 href={user.role === "creator" ? "/dashboard/creator" : "/dashboard/brand"}
                 className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-medium text-slate-200 transition-colors"
               >
-                <User className="w-3.5 h-3.5 text-cyan-400" />
-                <span className="max-w-[120px] truncate">{user.full_name || user.email}</span>
+                <span className="max-w-[100px] truncate">{user.full_name || user.email}</span>
                 <span className="px-1.5 py-0.2 bg-cyan-500/20 text-cyan-300 rounded text-[10px] uppercase font-mono">
                   {user.role}
                 </span>
