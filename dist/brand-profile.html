@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brand Profile & Content Strategy — CreatorOS AI</title>
+<meta name="description" content="Configure your brand identity, content strategy, preferred AI video formats, budget, and billing details.">
+<meta name="theme-color" content="#07080c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%237c5cff'/%3E%3Ctext x='16' y='23' font-family='sans-serif' font-size='19' font-weight='700' text-anchor='middle' fill='%2306070b'%3EC%3C/text%3E%3C/svg%3E">
+</head>
+<body data-page="brand-profile">
+<header class="nav" id="nav"></header>
+
+<main class="section-tight" style="padding-top:var(--sp-6);padding-bottom:var(--sp-8)">
+  <div class="wrap" style="max-width:1040px">
+    
+    <!-- Hero Brand Profile Header Banner -->
+    <div class="card p-5 mb-5" style="border:1px solid rgba(0,229,195,0.3);background:radial-gradient(ellipse at 80% 20%, rgba(0,229,195,0.10), var(--ink-800))">
+      <div class="row-between" style="align-items:center;gap:18px;flex-wrap:wrap">
+        <div class="row" style="gap:18px;align-items:center">
+          <div id="brandLogoPreview" style="width:72px;height:72px;border-radius:18px;background:var(--signal);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:1.8rem;font-weight:700;color:#07080c;box-shadow:var(--glow);flex-shrink:0;overflow:hidden">
+            <span id="brandLogoInitials">NA</span>
+          </div>
+          <div>
+            <div class="row" style="gap:8px;align-items:center">
+              <h1 id="heroBrandName" style="font-size:clamp(1.5rem,2.8vw,2rem);letter-spacing:-.02em">Nexus AI Studios</h1>
+              <span class="chip chip-violet" style="font-size:.74rem">Brand Client</span>
+              <span class="chip chip-mint" id="heroIndustry">SaaS &amp; B2B Tech</span>
+            </div>
+            <p class="sub mt-1" id="heroTagline" style="font-size:.95rem;color:var(--text)">Next-Gen Generative AI Media &amp; Performance Marketing</p>
+            <div class="row mt-2" style="gap:8px">
+              <span class="chip" id="heroBudget">Budget: ₹1,50,000 / mo</span>
+              <span class="chip" id="heroSize">11-50 employees</span>
+            </div>
+          </div>
+        </div>
+        <div class="row" style="gap:10px">
+          <a class="btn btn-ghost btn-sm" href="dashboard.html">My Orders</a>
+          <a class="btn btn-primary btn-sm" href="brief.html">Post a brief</a>
+          <button class="btn btn-primary btn-sm" id="btnSaveTop">Save profile</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile Form Sections -->
+    <div class="grid g-4" style="grid-template-columns:1fr">
+
+      <!-- Section 1: Company & Brand Identity -->
+      <section class="card p-5">
+        <div class="row-between mb-4" style="align-items:center;border-bottom:1px solid var(--line);padding-bottom:12px">
+          <div>
+            <h2 style="font-size:1.25rem">Company Identity &amp; Information</h2>
+            <p class="tiny mt-1" style="color:var(--muted)">Verified brand credentials shown to prospective AI creators when reviewing your briefs.</p>
+          </div>
+          <span class="chip chip-mint">Brand OS</span>
+        </div>
+
+        <div class="grid g-3 mb-4" style="grid-template-columns:repeat(auto-fit, minmax(280px, 1fr))">
+          <label class="field">
+            <span class="field-label">Brand / Company Name</span>
+            <input class="input" id="brandName" type="text" placeholder="e.g. Nexus AI Studios" value="Nexus AI Studios">
+          </label>
+          <label class="field">
+            <span class="field-label">Company Tagline / One-Liner</span>
+            <input class="input" id="brandTagline" type="text" placeholder="e.g. Next-Gen Generative AI Media & Performance Marketing" value="Next-Gen Generative AI Media & Performance Marketing">
+          </label>
+        </div>
+
+        <div class="grid g-3 mb-4" style="grid-template-columns:repeat(auto-fit, minmax(220px, 1fr))">
+          <label class="field">
+            <span class="field-label">Industry Vertical</span>
+            <select class="select" id="brandIndustry">
+              <option value="SaaS & B2B Tech">SaaS &amp; B2B Tech</option>
+              <option value="E-Commerce & DTC Brands">E-Commerce &amp; DTC Brands</option>
+              <option value="Mobile Apps & Gaming">Mobile Apps &amp; Gaming</option>
+              <option value="HealthTech & Wellness">HealthTech &amp; Wellness</option>
+              <option value="FinTech & Web3">FinTech &amp; Web3</option>
+              <option value="Creative Agency">Creative &amp; Performance Agency</option>
+            </select>
+          </label>
+          <label class="field">
+            <span class="field-label">Company Size</span>
+            <select class="select" id="brandSize">
+              <option value="1-10 employees">1-10 employees</option>
+              <option value="11-50 employees" selected>11-50 employees</option>
+              <option value="51-200 employees">51-200 employees</option>
+              <option value="201-1000 employees">201-1000 employees</option>
+              <option value="1000+ enterprise">1000+ enterprise</option>
+            </select>
+          </label>
+          <label class="field">
+            <span class="field-label">Official Website URL</span>
+            <input class="input" id="brandWebsite" type="url" placeholder="https://..." value="https://nexusbrand.ai">
+          </label>
+        </div>
+
+        <label class="field mb-4">
+          <span class="field-label">Company Overview &amp; Collaboration Goals</span>
+          <textarea class="textarea" id="brandDesc" rows="3" placeholder="Tell creators what your brand does and what content drives ROI for your campaigns...">We partner with elite GenAI creators to scale our performance ad creative pipeline across TikTok, Meta, and YouTube Shorts. We release escrow within 24 hours of deliverable approval.</textarea>
+        </label>
+
+        <label class="field">
+          <span class="field-label">Official Logo URL</span>
+          <input class="input" id="brandLogo" type="url" placeholder="https://..." value="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&auto=format&fit=crop&q=80">
+        </label>
+      </section>
+
+      <!-- Section 2: Content Strategy & Creator Requirements -->
+      <section class="card p-5">
+        <div class="row-between mb-4" style="align-items:center;border-bottom:1px solid var(--line);padding-bottom:12px">
+          <div>
+            <h2 style="font-size:1.25rem">Content Strategy &amp; Creative Guidelines</h2>
+            <p class="tiny mt-1" style="color:var(--muted)">Set your creative expectations, preferred formats, and brand guidelines for all pitches.</p>
+          </div>
+          <span class="chip chip-violet">Brief Signals</span>
+        </div>
+
+        <div class="grid g-3 mb-4" style="grid-template-columns:repeat(auto-fit, minmax(240px, 1fr))">
+          <label class="field">
+            <span class="field-label">Monthly Content Budget (₹ INR)</span>
+            <input class="input" id="brandBudget" type="number" min="10000" step="5000" placeholder="150000" value="150000">
+          </label>
+          <label class="field">
+            <span class="field-label">Target Turnaround Time (Days)</span>
+            <input class="input" id="brandTurnaround" type="number" min="1" max="30" placeholder="5" value="5">
+          </label>
+        </div>
+
+        <div class="mb-4">
+          <span class="field-label mb-2" style="display:block">Preferred Deliverable Formats (Click to toggle)</span>
+          <div id="brandFormatsContainer" class="row" style="gap:8px;flex-wrap:wrap"></div>
+        </div>
+
+        <label class="field">
+          <span class="field-label">Brand Voice &amp; Avatar Tone Guidelines</span>
+          <textarea class="textarea" id="brandVoice" rows="3" placeholder="Clean, energetic pacing, high visual contrast, authentic avatar dubbing...">Clean, modern, high-contrast, energetic pacing with verified realistic human-like avatars. Pacing must hook viewers in the first 2.5 seconds.</textarea>
+        </label>
+      </section>
+
+      <!-- Section 3: Billing & Primary Contact -->
+      <section class="card p-5">
+        <div class="row-between mb-4" style="align-items:center;border-bottom:1px solid var(--line);padding-bottom:12px">
+          <div>
+            <h2 style="font-size:1.25rem">Point of Contact &amp; Billing Details</h2>
+            <p class="tiny mt-1" style="color:var(--muted)">Invoicing details for escrow milestone releases and official Indian GST compliance.</p>
+          </div>
+          <span class="chip">Invoicing</span>
+        </div>
+
+        <div class="grid g-3 mb-4" style="grid-template-columns:repeat(auto-fit, minmax(240px, 1fr))">
+          <label class="field">
+            <span class="field-label">Creative Lead / Contact Person</span>
+            <input class="input" id="contactName" type="text" placeholder="e.g. Alexander Wright" value="Alexander Wright (Head of Creative)">
+          </label>
+          <label class="field">
+            <span class="field-label">Official Billing Email</span>
+            <input class="input" id="contactEmail" type="email" placeholder="billing@nexusbrand.ai" value="billing@nexusbrand.ai">
+          </label>
+        </div>
+
+        <div class="grid g-3" style="grid-template-columns:repeat(auto-fit, minmax(240px, 1fr))">
+          <label class="field">
+            <span class="field-label">Tax ID / GSTIN Number</span>
+            <input class="input" id="contactGst" type="text" placeholder="e.g. 36AAACN1234F1Z5" value="GSTIN-36AAACN1234F1Z5">
+          </label>
+          <label class="field">
+            <span class="field-label">Office City / Headquarters</span>
+            <input class="input" id="contactCity" type="text" placeholder="e.g. Bangalore, India" value="Bangalore, Karnataka, India">
+          </label>
+        </div>
+      </section>
+
+      <!-- Save & Status Bottom Bar -->
+      <div class="row-between card p-4" style="align-items:center;background:var(--ink-800)">
+        <div>
+          <span style="font-weight:600">Company identity syncs with your active posted briefs.</span>
+          <p class="tiny mt-1" style="color:var(--muted)">Saved on this device and synced with your verified Supabase brand workspace.</p>
+        </div>
+        <button class="btn btn-primary" id="btnSaveBottom" style="min-width:180px">Save Brand Profile</button>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer class="footer" id="footer"></footer>
+
+<script src="assets/js/vendor/supabase.js"></script>
+<script src="assets/js/supabase.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/ai.js"></script>
+<script src="assets/js/store.js"></script>
+<script src="assets/js/ui.js"></script>
+<script>
+(() => {
+  const ALL_FORMATS = [
+    "Short-Form Video (9:16)", "AI UGC Video Ads", "High-CTR YouTube Thumbnails",
+    "AI Voiceover & Multilingual Dubbing", "3D Product Renders & Motion", "Viral Scriptwriting & Ad Copy"
+  ];
+
+  let selectedFormats = [
+    "Short-Form Video (9:16)", "AI UGC Video Ads", "High-CTR YouTube Thumbnails"
+  ];
+
+  function renderFormats() {
+    const el = document.getElementById("brandFormatsContainer");
+    if (!el) return;
+    el.innerHTML = ALL_FORMATS.map((fmt) => {
+      const active = selectedFormats.includes(fmt);
+      return `<button type="button" class="chip ${active ? 'chip-mint' : ''}" style="cursor:pointer;border-color:${active ? 'var(--mint)' : 'var(--line)'}" data-fmt="${UI.esc(fmt)}">
+        ${active ? UI.icon('check', 11, 2.5) : ''} ${UI.esc(fmt)}
+      </button>`;
+    }).join("");
+
+    el.querySelectorAll("button[data-fmt]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const f = btn.getAttribute("data-fmt");
+        if (selectedFormats.includes(f)) {
+          selectedFormats = selectedFormats.filter((x) => x !== f);
+        } else {
+          selectedFormats.push(f);
+        }
+        renderFormats();
+      });
+    });
+  }
+
+  function updateHero() {
+    const name = document.getElementById("brandName")?.value || "Nexus AI Studios";
+    const tagline = document.getElementById("brandTagline")?.value || "Next-Gen Generative AI Media";
+    const ind = document.getElementById("brandIndustry")?.value || "SaaS & B2B Tech";
+    const size = document.getElementById("brandSize")?.value || "11-50 employees";
+    const budget = document.getElementById("brandBudget")?.value || "150000";
+    const logo = document.getElementById("brandLogo")?.value;
+
+    document.getElementById("heroBrandName").textContent = name;
+    document.getElementById("heroTagline").textContent = tagline;
+    document.getElementById("heroIndustry").textContent = ind;
+    document.getElementById("heroSize").textContent = size;
+    document.getElementById("heroBudget").textContent = `Budget: ₹${Number(budget).toLocaleString('en-IN')} / mo`;
+
+    const logoBox = document.getElementById("brandLogoPreview");
+    if (logoBox) {
+      if (logo && logo.startsWith("http")) {
+        logoBox.innerHTML = `<img src="${UI.esc(logo)}" alt="${UI.esc(name)}" style="width:100%;height:100%;object-fit:cover">`;
+      } else {
+        logoBox.innerHTML = `<span>${UI.esc(name.substring(0, 2).toUpperCase())}</span>`;
+      }
+    }
+  }
+
+  function loadSavedData() {
+    try {
+      const saved = localStorage.getItem("creatoros_brand_profile_data");
+      if (saved) {
+        const p = JSON.parse(saved);
+        if (p.name) document.getElementById("brandName").value = p.name;
+        if (p.tagline) document.getElementById("brandTagline").value = p.tagline;
+        if (p.industry) document.getElementById("brandIndustry").value = p.industry;
+        if (p.size) document.getElementById("brandSize").value = p.size;
+        if (p.website) document.getElementById("brandWebsite").value = p.website;
+        if (p.desc) document.getElementById("brandDesc").value = p.desc;
+        if (p.logo) document.getElementById("brandLogo").value = p.logo;
+        if (p.budget) document.getElementById("brandBudget").value = p.budget;
+        if (p.turnaround) document.getElementById("brandTurnaround").value = p.turnaround;
+        if (p.voice) document.getElementById("brandVoice").value = p.voice;
+        if (p.contactName) document.getElementById("contactName").value = p.contactName;
+        if (p.contactEmail) document.getElementById("contactEmail").value = p.contactEmail;
+        if (p.contactGst) document.getElementById("contactGst").value = p.contactGst;
+        if (p.contactCity) document.getElementById("contactCity").value = p.contactCity;
+        if (Array.isArray(p.formats)) selectedFormats = p.formats;
+      } else if (typeof Store !== "undefined") {
+        const b = Store.getBrand();
+        if (b.name) document.getElementById("brandName").value = b.name;
+        if (b.company) document.getElementById("brandTagline").value = b.company;
+      }
+      updateHero();
+    } catch (e) {
+      console.warn("Could not load brand profile:", e);
+    }
+  }
+
+  async function saveBrandProfile() {
+    const saveBtn = document.getElementById("btnSaveBottom");
+    const saveTop = document.getElementById("btnSaveTop");
+    if (saveBtn) saveBtn.textContent = "Saving...";
+    if (saveTop) saveTop.textContent = "Saving...";
+
+    const payload = {
+      name: document.getElementById("brandName").value.trim(),
+      tagline: document.getElementById("brandTagline").value.trim(),
+      industry: document.getElementById("brandIndustry").value,
+      size: document.getElementById("brandSize").value,
+      website: document.getElementById("brandWebsite").value.trim(),
+      desc: document.getElementById("brandDesc").value.trim(),
+      logo: document.getElementById("brandLogo").value.trim(),
+      budget: Number(document.getElementById("brandBudget").value) || 150000,
+      turnaround: Number(document.getElementById("brandTurnaround").value) || 5,
+      voice: document.getElementById("brandVoice").value.trim(),
+      contactName: document.getElementById("contactName").value.trim(),
+      contactEmail: document.getElementById("contactEmail").value.trim(),
+      contactGst: document.getElementById("contactGst").value.trim(),
+      contactCity: document.getElementById("contactCity").value.trim(),
+      formats: selectedFormats
+    };
+
+    localStorage.setItem("creatoros_brand_profile_data", JSON.stringify(payload));
+    if (typeof Store !== "undefined") {
+      Store.setBrand({ name: payload.name, company: payload.tagline });
+    }
+    updateHero();
+
+    try {
+      if (typeof SupabaseBridge !== "undefined") {
+        await SupabaseBridge.updateProfile({
+          name: payload.name,
+          company_name: payload.name,
+          bio: payload.desc,
+          avatar_url: payload.logo,
+          role: "brand"
+        });
+      }
+    } catch (e) {
+      console.warn("Supabase brand profile sync note:", e);
+    }
+
+    if (saveBtn) saveBtn.textContent = "Save Brand Profile";
+    if (saveTop) saveTop.textContent = "Save profile";
+    UI.toast("Brand profile and content strategy saved successfully!", "ok");
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    UI.mountNav("brand-profile");
+    UI.mountFooter();
+
+    renderFormats();
+    loadSavedData();
+
+    document.getElementById("brandName")?.addEventListener("input", updateHero);
+    document.getElementById("brandTagline")?.addEventListener("input", updateHero);
+    document.getElementById("brandIndustry")?.addEventListener("change", updateHero);
+    document.getElementById("brandSize")?.addEventListener("change", updateHero);
+    document.getElementById("brandBudget")?.addEventListener("input", updateHero);
+    document.getElementById("brandLogo")?.addEventListener("change", updateHero);
+
+    document.getElementById("btnSaveTop")?.addEventListener("click", saveBrandProfile);
+    document.getElementById("btnSaveBottom")?.addEventListener("click", saveBrandProfile);
+  });
+})();
+</script>
+</body>
+</html>

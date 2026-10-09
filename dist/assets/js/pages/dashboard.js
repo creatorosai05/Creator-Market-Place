@@ -240,7 +240,7 @@
   }
 
   /* ---------- Brand editor ---------- */
-  $("#editBrand").addEventListener("click", () => {
+  $("#editBrand")?.addEventListener("click", () => {
     const b = Store.getBrand();
     UI.modal({
       title: "Your brand profile", subtitle: "Shown to creators when you place an order",

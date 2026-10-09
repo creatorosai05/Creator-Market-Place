@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sign In — CreatorOS AI</title>
+<meta name="description" content="Sign in to your CreatorOS AI account. Access briefs, manage creator orders, and control your profile.">
+<meta name="theme-color" content="#07080c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%237c5cff'/%3E%3Ctext x='16' y='23' font-family='sans-serif' font-size='19' font-weight='700' text-anchor='middle' fill='%2306070b'%3EC%3C/text%3E%3C/svg%3E">
+</head>
+<body data-page="login">
+<header class="nav" id="nav"></header>
+
+<main class="section-tight" style="padding-top:var(--sp-7);padding-bottom:var(--sp-8)">
+  <div class="wrap" style="max-width:460px">
+    <div class="card p-6" style="border:1px solid var(--line-strong);background:radial-gradient(ellipse at 50% 0%, rgba(124,92,255,0.12), var(--ink-800))">
+      
+      <div class="text-center mb-4">
+        <span class="eyebrow eyebrow-violet">Authentication</span>
+        <h1 class="mt-2" style="font-size:1.7rem">Sign In to CreatorOS</h1>
+        <p class="sub mt-1" style="font-size:.88rem">Access your workspace, escrow orders, and profile.</p>
+      </div>
+
+      <div class="tabs mb-4" role="tablist">
+        <a class="tab" href="login.html" aria-selected="true" style="color:var(--text);border-color:var(--violet)">Sign in</a>
+        <a class="tab" href="signup.html">Create account</a>
+      </div>
+
+      <form id="standaloneLoginForm" class="stack" style="gap:var(--sp-3)">
+        <label class="field">
+          <span class="field-label">Email address</span>
+          <input class="input" id="loginEmail" type="email" required placeholder="name@company.com" autofocus>
+        </label>
+        <label class="field">
+          <span class="field-label">Password</span>
+          <input class="input" id="loginPassword" type="password" required placeholder="••••••••">
+        </label>
+
+        <button class="btn btn-primary mt-2" type="submit" id="btnLoginSubmit" style="width:100%">Sign in</button>
+      </form>
+
+      <div class="text-center mt-4" style="border-top:1px solid var(--line);padding-top:16px">
+        <span class="tiny" style="color:var(--muted)">Don't have an account yet?</span>
+        <a href="signup.html" class="tiny ml-2" style="color:var(--mint);font-weight:600">Create a Creator or Brand account →</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer" id="footer"></footer>
+
+<script src="assets/js/vendor/supabase.js"></script>
+<script src="assets/js/supabase.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/ai.js"></script>
+<script src="assets/js/store.js"></script>
+<script src="assets/js/ui.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  UI.mountNav("login");
+  UI.mountFooter();
+
+  const form = document.getElementById("standaloneLoginForm");
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = document.getElementById("loginEmail").value.trim();
+    const password = document.getElementById("loginPassword").value;
+    const btn = document.getElementById("btnLoginSubmit");
+    btn.disabled = true;
+    btn.textContent = "Signing in...";
+
+    try {
+      if (typeof SupabaseBridge !== "undefined") {
+        await SupabaseBridge.signIn({ email, password });
+        UI.toast("Signed in successfully! Redirecting...", "ok");
+        const u = SupabaseBridge.getUser();
+        const p = SupabaseBridge.getProfile();
+        const role = p?.role || u?.user_metadata?.role || "brand";
+        setTimeout(() => {
+          window.location.href = role === "creator" ? "creator-profile.html" : "brand-profile.html";
+        }, 500);
+      }
+    } catch (err) {
+      UI.toast(err.message || "Failed to sign in. Please verify credentials.", "err");
+      btn.disabled = false;
+      btn.textContent = "Sign in";
+    }
+  });
+});
+</script>
+</body>
+</html>

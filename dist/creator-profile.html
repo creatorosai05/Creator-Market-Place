@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Creator Profile & Portfolio — CreatorOS AI</title>
+<meta name="description" content="Manage your AI creator profile, tool stack, rates, and verified portfolio showcase.">
+<meta name="theme-color" content="#07080c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%237c5cff'/%3E%3Ctext x='16' y='23' font-family='sans-serif' font-size='19' font-weight='700' text-anchor='middle' fill='%2306070b'%3EC%3C/text%3E%3C/svg%3E">
+</head>
+<body data-page="creator-profile">
+<header class="nav" id="nav"></header>
+
+<main class="section-tight" style="padding-top:var(--sp-6);padding-bottom:var(--sp-8)">
+  <div class="wrap" style="max-width:1040px">
+    
+    <!-- Hero Profile Header Banner -->
+    <div class="card p-5 mb-5" style="border:1px solid rgba(124,92,255,0.3);background:radial-gradient(ellipse at 80% 20%, rgba(124,92,255,0.12), var(--ink-800))">
+      <div class="row-between" style="align-items:center;gap:18px;flex-wrap:wrap">
+        <div class="row" style="gap:18px;align-items:center">
+          <div id="creatorAvatarPreview" style="width:72px;height:72px;border-radius:18px;background:var(--signal);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:1.8rem;font-weight:700;color:#07080c;box-shadow:var(--glow);flex-shrink:0;overflow:hidden">
+            <span id="creatorAvatarInitials">AI</span>
+          </div>
+          <div>
+            <div class="row" style="gap:8px;align-items:center">
+              <h1 id="heroName" style="font-size:clamp(1.5rem,2.8vw,2rem);letter-spacing:-.02em">Creator Profile</h1>
+              <span class="chip chip-mint" style="font-size:.74rem">AI Creator</span>
+              <span class="badge badge-verified" title="Identity Verified">Verified</span>
+            </div>
+            <p class="sub mt-1" id="heroHeadline" style="font-size:.95rem;color:var(--text)">Senior GenAI Content Creator & Video Specialist</p>
+            <div class="row mt-2" style="gap:8px">
+              <span class="chip" id="heroLocation">Hyderabad, India (Remote)</span>
+              <span class="chip chip-violet" id="heroRate">₹2,500 / hr</span>
+            </div>
+          </div>
+        </div>
+        <div class="row" style="gap:10px">
+          <a class="btn btn-ghost btn-sm" href="creator-dashboard.html">Creator Studio</a>
+          <button class="btn btn-primary btn-sm" id="btnSaveTop">Save profile</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profile Form Sections -->
+    <div class="grid g-4" style="grid-template-columns:1fr">
+
+      <!-- Section 1: Personal & Professional Details -->
+      <section class="card p-5">
+        <div class="row-between mb-4" style="align-items:center;border-bottom:1px solid var(--line);padding-bottom:12px">
+          <div>
+            <h2 style="font-size:1.25rem">Personal &amp; Professional Details</h2>
+            <p class="tiny mt-1" style="color:var(--muted)">Your public information displayed to brands when pitching briefs.</p>
+          </div>
+          <span class="chip chip-violet">Core info</span>
+        </div>
+
+        <div class="grid g-3 mb-4" style="grid-template-columns:repeat(auto-fit, minmax(280px, 1fr))">
+          <label class="field">
+            <span class="field-label">Full Name or Creator Alias</span>
+            <input class="input" id="profName" type="text" placeholder="e.g. Vamshi VFX" value="Vamshi VFX">
+          </label>
+          <label class="field">
+            <span class="field-label">Professional Headline</span>
+            <input class="input" id="profHeadline" type="text" placeholder="e.g. Senior GenAI Animator & UGC Specialist" value="Senior GenAI Animator & Viral UGC Specialist">
+          </label>
+        </div>
+
+        <div class="grid g-3 mb-4" style="grid-template-columns:repeat(auto-fit, minmax(220px, 1fr))">
+          <label class="field">
+            <span class="field-label">Location / Country</span>
+            <input class="input" id="profLocation" type="text" placeholder="e.g. Hyderabad, India" value="Hyderabad, India (Remote Global)">
+          </label>
+          <label class="field">
+            <span class="field-label">Hourly Rate (₹ INR)</span>
+            <input class="input" id="profRate" type="number" min="500" step="100" placeholder="2500" value="2500">
+          </label>
+          <label class="field">
+            <span class="field-label">Experience (Years)</span>
+            <input class="input" id="profExp" type="number" min="1" max="25" placeholder="4" value="4">
+          </label>
+        </div>
+
+        <label class="field mb-4">
+          <span class="field-label">Professional Bio &amp; Workflow Overview</span>
+          <textarea class="textarea" id="profBio" rows="3" placeholder="Describe your creative process, models, custom LoRAs, and production turnarounds...">Specialized in photorealistic AI video pipelines combining Runway Gen-3 with custom LoRAs and ElevenLabs multilingual voice dubbing. Over 50M+ organic views generated for client campaigns.</textarea>
+        </label>
+
+        <div class="grid g-3" style="grid-template-columns:repeat(auto-fit, minmax(240px, 1fr))">
+          <label class="field">
+            <span class="field-label">Avatar / Photo URL</span>
+            <input class="input" id="profAvatar" type="url" placeholder="https://..." value="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80">
+          </label>
+          <label class="field">
+            <span class="field-label">Portfolio Website URL</span>
+            <input class="input" id="profWebsite" type="url" placeholder="https://..." value="https://portfolio.creatoros.ai/vamshi">
+          </label>
+          <label class="field">
+            <span class="field-label">Social / X / YouTube</span>
+            <input class="input" id="profSocial" type="text" placeholder="@handle or channel link" value="@vamshivfx • youtube.com/@vamshivfx">
+          </label>
+        </div>
+      </section>
+
+      <!-- Section 2: AI Tools & Skills Stack -->
+      <section class="card p-5">
+        <div class="row-between mb-4" style="align-items:center;border-bottom:1px solid var(--line);padding-bottom:12px">
+          <div>
+            <h2 style="font-size:1.25rem">AI Tools &amp; Specialization Skills</h2>
+            <p class="tiny mt-1" style="color:var(--muted)">Select the GenAI models and workflows you actively use for client deliverables.</p>
+          </div>
+          <span class="chip chip-mint">GenAI Stack</span>
+        </div>
+
+        <div class="mb-4">
+          <span class="field-label mb-2" style="display:block">Active AI Tool Stack (Click to toggle)</span>
+          <div id="toolsContainer" class="row" style="gap:8px;flex-wrap:wrap"></div>
+        </div>
+
+        <div class="row mb-5" style="gap:10px;align-items:flex-end">
+          <label class="field grow">
+            <span class="field-label">Add Custom AI Tool or Framework</span>
+            <input class="input" id="customToolInput" type="text" placeholder="e.g. ComfyUI, AnimateDiff, Suno AI, Luma">
+          </label>
+          <button class="btn btn-ghost btn-sm" id="btnAddTool" type="button" style="height:42px">Add tool</button>
+        </div>
+
+        <div>
+          <span class="field-label mb-2" style="display:block">Content Formats &amp; Categories</span>
+          <div id="catsContainer" class="row" style="gap:8px;flex-wrap:wrap"></div>
+        </div>
+      </section>
+
+      <!-- Section 3: Interactive Portfolio & Projects Showcase (CRUD) -->
+      <section class="card p-5">
+        <div class="row-between mb-4" style="align-items:center;border-bottom:1px solid var(--line);padding-bottom:12px">
+          <div>
+            <h2 style="font-size:1.25rem">Portfolio &amp; Project Showcase</h2>
+            <p class="tiny mt-1" style="color:var(--muted)">Showcase high-performing campaigns, view metrics, video links, and tool breakdowns.</p>
+          </div>
+          <button class="btn btn-primary btn-sm" id="btnToggleNewProject">+ Add project</button>
+        </div>
+
+        <!-- Add Project Subform (Collapsible) -->
+        <div id="newProjectBox" class="card p-4 mb-5" style="background:var(--ink-750);border:1px dashed rgba(124,92,255,0.4);display:none">
+          <h3 style="font-size:1rem;margin-bottom:12px">Add New Portfolio Project</h3>
+          <div class="grid g-3 mb-3" style="grid-template-columns:repeat(auto-fit, minmax(240px, 1fr))">
+            <label class="field">
+              <span class="field-label">Project Title</span>
+              <input class="input" id="newProjTitle" type="text" placeholder="e.g. 5x Hyper-Realistic AI UGC Ads for HealthTech">
+            </label>
+            <label class="field">
+              <span class="field-label">Category</span>
+              <select class="select" id="newProjCat">
+                <option value="Short-Form Video (9:16)">Short-Form Video (9:16)</option>
+                <option value="AI UGC Video Ads">AI UGC Video Ads</option>
+                <option value="AI Art & Thumbnails">AI Art &amp; Thumbnails</option>
+                <option value="3D & VFX Motion">3D &amp; VFX Motion</option>
+                <option value="AI Voiceover & Dubbing">AI Voiceover &amp; Dubbing</option>
+              </select>
+            </label>
+          </div>
+          <div class="grid g-3 mb-3" style="grid-template-columns:repeat(auto-fit, minmax(240px, 1fr))">
+            <label class="field">
+              <span class="field-label">Media / Video URL</span>
+              <input class="input" id="newProjMedia" type="url" placeholder="https://drive.google.com/... or video link">
+            </label>
+            <label class="field">
+              <span class="field-label">Campaign Metrics</span>
+              <input class="input" id="newProjMetrics" type="text" placeholder="e.g. 4.2M views, 3.8% CTR, 18k shares">
+            </label>
+            <label class="field">
+              <span class="field-label">AI Tools Used</span>
+              <input class="input" id="newProjTools" type="text" placeholder="e.g. Runway Gen-3, ElevenLabs, Topaz">
+            </label>
+          </div>
+          <label class="field mb-3">
+            <span class="field-label">Project Summary &amp; Results</span>
+            <textarea class="textarea" id="newProjNotes" rows="2" placeholder="Brief explanation of client brief, prompt strategy, and turnaround time..."></textarea>
+          </label>
+          <div class="row" style="gap:8px;justify-content:flex-end">
+            <button class="btn btn-ghost btn-sm" id="btnCancelProject" type="button">Cancel</button>
+            <button class="btn btn-primary btn-sm" id="btnSaveProject" type="button">Save to portfolio</button>
+          </div>
+        </div>
+
+        <!-- Project Cards List -->
+        <div id="portfolioList" class="stack" style="gap:var(--sp-4)"></div>
+      </section>
+
+      <!-- Save & Status Bottom Bar -->
+      <div class="row-between card p-4" style="align-items:center;background:var(--ink-800)">
+        <div>
+          <span style="font-weight:600" id="saveStatusText">All details stored securely on CreatorOS.</span>
+          <p class="tiny mt-1" style="color:var(--muted)">Syncs with Supabase backend and updates live marketplace matching signals.</p>
+        </div>
+        <button class="btn btn-primary" id="btnSaveBottom" style="min-width:160px">Save Profile</button>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer class="footer" id="footer"></footer>
+
+<script src="assets/js/vendor/supabase.js"></script>
+<script src="assets/js/supabase.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/ai.js"></script>
+<script src="assets/js/store.js"></script>
+<script src="assets/js/ui.js"></script>
+<script>
+(() => {
+  // Available tools library
+  const ALL_TOOLS = [
+    "Runway Gen-3", "Midjourney v6", "ElevenLabs", "Kling AI", "Flux 1.1",
+    "Sora Alpha", "Luma Dream Machine", "Topaz Video AI", "ComfyUI",
+    "Claude 3.5 Sonnet", "ChatGPT-4o", "Blender 3D", "After Effects", "Premiere Pro"
+  ];
+
+  const ALL_CATS = [
+    "Short-Form Video (9:16)", "AI UGC Video Ads", "High-CTR Thumbnails",
+    "AI Art & Concepts", "AI Voiceover & Dubbing", "3D & VFX Motion"
+  ];
+
+  let selectedTools = ["Runway Gen-3", "Midjourney v6", "ElevenLabs", "Kling AI", "Topaz Video AI"];
+  let selectedCats = ["Short-Form Video (9:16)", "AI UGC Video Ads", "3D & VFX Motion"];
+
+  let portfolioItems = [
+    {
+      id: "port-1",
+      title: "5x Hyper-Realistic AI UGC Ads for HealthTech",
+      category: "AI UGC Video Ads",
+      media: "https://drive.google.com/drive/folders/sample-ugc-delivery",
+      metrics: "4.8M Views • 3.4% CTR • ₹450k GMV",
+      tools: ["Runway Gen-3", "ElevenLabs", "Topaz AI"],
+      notes: "Produced 5 custom video ad variations featuring realistic human avatars and localized Hindi & English voice dubbing."
+    },
+    {
+      id: "port-2",
+      title: "SaaS Explainer 3D Motion Concept",
+      category: "3D & VFX Motion",
+      media: "https://vimeo.com/sample-saas-render",
+      metrics: "1.2M Views • 98.4% Retention Rate",
+      tools: ["Midjourney v6", "Kling AI", "After Effects"],
+      notes: "Full 3D abstract workflow showcasing AI prompt pipelines with cinematic lighting and sound design."
+    }
+  ];
+
+  function renderTools() {
+    const el = document.getElementById("toolsContainer");
+    if (!el) return;
+    el.innerHTML = ALL_TOOLS.map((tool) => {
+      const active = selectedTools.includes(tool);
+      return `<button type="button" class="chip ${active ? 'chip-mint' : ''}" style="cursor:pointer;border-color:${active ? 'var(--mint)' : 'var(--line)'}" data-tool="${UI.esc(tool)}">
+        ${active ? UI.icon('check', 11, 2.5) : ''} ${UI.esc(tool)}
+      </button>`;
+    }).join("");
+
+    el.querySelectorAll("button[data-tool]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const t = btn.getAttribute("data-tool");
+        if (selectedTools.includes(t)) {
+          selectedTools = selectedTools.filter((x) => x !== t);
+        } else {
+          selectedTools.push(t);
+        }
+        renderTools();
+      });
+    });
+  }
+
+  function renderCats() {
+    const el = document.getElementById("catsContainer");
+    if (!el) return;
+    el.innerHTML = ALL_CATS.map((cat) => {
+      const active = selectedCats.includes(cat);
+      return `<button type="button" class="chip ${active ? 'chip-violet' : ''}" style="cursor:pointer;border-color:${active ? 'var(--violet)' : 'var(--line)'}" data-cat="${UI.esc(cat)}">
+        ${active ? UI.icon('check', 11, 2.5) : ''} ${UI.esc(cat)}
+      </button>`;
+    }).join("");
+
+    el.querySelectorAll("button[data-cat]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const c = btn.getAttribute("data-cat");
+        if (selectedCats.includes(c)) {
+          selectedCats = selectedCats.filter((x) => x !== c);
+        } else {
+          selectedCats.push(c);
+        }
+        renderCats();
+      });
+    });
+  }
+
+  function renderPortfolio() {
+    const el = document.getElementById("portfolioList");
+    if (!el) return;
+    if (!portfolioItems.length) {
+      el.innerHTML = `<div class="card p-4 text-center" style="color:var(--muted)">No portfolio items yet. Click "+ Add project" to showcase your best AI deliverables.</div>`;
+      return;
+    }
+
+    el.innerHTML = portfolioItems.map((item, idx) => `
+      <article class="card p-4" style="background:var(--ink-750);border:1px solid var(--line)">
+        <div class="row-between" style="align-items:flex-start;gap:12px;flex-wrap:wrap">
+          <div class="grow" style="min-width:240px">
+            <div class="row" style="gap:8px;align-items:center">
+              <h4 style="font-size:1.05rem;font-weight:600">${UI.esc(item.title)}</h4>
+              <span class="chip chip-violet" style="font-size:.72rem">${UI.esc(item.category)}</span>
+            </div>
+            <div class="row mt-2" style="gap:10px;font-size:.82rem;color:var(--mint)">
+              <span>${UI.icon('chart', 12)} ${UI.esc(item.metrics)}</span>
+            </div>
+            <p class="tiny mt-2" style="color:var(--text);line-height:1.5">${UI.esc(item.notes)}</p>
+            <div class="row mt-3" style="gap:6px">
+              ${(item.tools || []).map((t) => `<span class="chip" style="font-size:.7rem">${UI.esc(t)}</span>`).join("")}
+            </div>
+          </div>
+          <div class="row" style="gap:8px;align-items:center">
+            ${item.media ? `<a href="${UI.esc(item.media)}" target="_blank" rel="noopener" class="btn btn-ghost btn-sm" style="padding:4px 9px;font-size:.78rem">${UI.icon('play', 12)} View link</a>` : ''}
+            <button class="btn btn-ghost btn-sm" style="padding:4px 9px;color:var(--rose)" data-del-idx="${idx}" title="Delete project">${UI.icon('x', 13)}</button>
+          </div>
+        </div>
+      </article>
+    `).join("");
+
+    el.querySelectorAll("button[data-del-idx]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const idx = Number(btn.getAttribute("data-del-idx"));
+        portfolioItems.splice(idx, 1);
+        renderPortfolio();
+        UI.toast("Project removed from portfolio", "ok");
+      });
+    });
+  }
+
+  function loadSavedData() {
+    try {
+      const saved = localStorage.getItem("creatoros_creator_profile_data");
+      if (saved) {
+        const p = JSON.parse(saved);
+        if (p.name) document.getElementById("profName").value = p.name;
+        if (p.headline) document.getElementById("profHeadline").value = p.headline;
+        if (p.location) document.getElementById("profLocation").value = p.location;
+        if (p.rate) document.getElementById("profRate").value = p.rate;
+        if (p.exp) document.getElementById("profExp").value = p.exp;
+        if (p.bio) document.getElementById("profBio").value = p.bio;
+        if (p.avatar) document.getElementById("profAvatar").value = p.avatar;
+        if (p.website) document.getElementById("profWebsite").value = p.website;
+        if (p.social) document.getElementById("profSocial").value = p.social;
+        if (Array.isArray(p.tools)) selectedTools = p.tools;
+        if (Array.isArray(p.cats)) selectedCats = p.cats;
+        if (Array.isArray(p.portfolio)) portfolioItems = p.portfolio;
+        updateHero();
+      }
+    } catch (e) {
+      console.warn("Could not load local creator profile:", e);
+    }
+  }
+
+  function updateHero() {
+    const name = document.getElementById("profName")?.value || "Vamshi VFX";
+    const headline = document.getElementById("profHeadline")?.value || "Senior GenAI Creator";
+    const loc = document.getElementById("profLocation")?.value || "Hyderabad, India";
+    const rate = document.getElementById("profRate")?.value || "2500";
+    const avatar = document.getElementById("profAvatar")?.value;
+
+    document.getElementById("heroName").textContent = name;
+    document.getElementById("heroHeadline").textContent = headline;
+    document.getElementById("heroLocation").textContent = loc;
+    document.getElementById("heroRate").textContent = `₹${Number(rate).toLocaleString('en-IN')} / hr`;
+    
+    const avBox = document.getElementById("creatorAvatarPreview");
+    if (avBox) {
+      if (avatar && avatar.startsWith("http")) {
+        avBox.innerHTML = `<img src="${UI.esc(avatar)}" alt="${UI.esc(name)}" style="width:100%;height:100%;object-fit:cover">`;
+      } else {
+        avBox.innerHTML = `<span>${UI.esc(name.substring(0, 2).toUpperCase())}</span>`;
+      }
+    }
+  }
+
+  async function saveProfile() {
+    const saveBtn = document.getElementById("btnSaveBottom");
+    const saveTop = document.getElementById("btnSaveTop");
+    if (saveBtn) saveBtn.textContent = "Saving...";
+    if (saveTop) saveTop.textContent = "Saving...";
+
+    const payload = {
+      name: document.getElementById("profName").value.trim(),
+      headline: document.getElementById("profHeadline").value.trim(),
+      location: document.getElementById("profLocation").value.trim(),
+      rate: Number(document.getElementById("profRate").value) || 2500,
+      exp: Number(document.getElementById("profExp").value) || 4,
+      bio: document.getElementById("profBio").value.trim(),
+      avatar: document.getElementById("profAvatar").value.trim(),
+      website: document.getElementById("profWebsite").value.trim(),
+      social: document.getElementById("profSocial").value.trim(),
+      tools: selectedTools,
+      cats: selectedCats,
+      portfolio: portfolioItems
+    };
+
+    localStorage.setItem("creatoros_creator_profile_data", JSON.stringify(payload));
+    updateHero();
+
+    try {
+      if (typeof SupabaseBridge !== "undefined") {
+        await SupabaseBridge.updateProfile({
+          name: payload.name,
+          bio: payload.bio,
+          avatar_url: payload.avatar,
+          ai_tools: payload.tools,
+          categories: payload.cats,
+          hourly_rate: payload.rate,
+          role: "creator"
+        });
+      }
+    } catch (e) {
+      console.warn("Supabase profile sync note:", e);
+    }
+
+    if (saveBtn) saveBtn.textContent = "Save Profile";
+    if (saveTop) saveTop.textContent = "Save profile";
+    UI.toast("Creator profile & portfolio saved successfully!", "ok");
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    UI.mountNav("creator-profile");
+    UI.mountFooter();
+
+    renderTools();
+    renderCats();
+    renderPortfolio();
+    loadSavedData();
+
+    document.getElementById("profName")?.addEventListener("input", updateHero);
+    document.getElementById("profHeadline")?.addEventListener("input", updateHero);
+    document.getElementById("profLocation")?.addEventListener("input", updateHero);
+    document.getElementById("profRate")?.addEventListener("input", updateHero);
+    document.getElementById("profAvatar")?.addEventListener("change", updateHero);
+
+    document.getElementById("btnSaveTop")?.addEventListener("click", saveProfile);
+    document.getElementById("btnSaveBottom")?.addEventListener("click", saveProfile);
+
+    // Custom tool addition
+    document.getElementById("btnAddTool")?.addEventListener("click", () => {
+      const input = document.getElementById("customToolInput");
+      const val = input.value.trim();
+      if (val && !selectedTools.includes(val)) {
+        selectedTools.push(val);
+        ALL_TOOLS.push(val);
+        input.value = "";
+        renderTools();
+        UI.toast(`Added ${val} to skills stack`, "ok");
+      }
+    });
+
+    // Toggle Add Project box
+    const newBox = document.getElementById("newProjectBox");
+    document.getElementById("btnToggleNewProject")?.addEventListener("click", () => {
+      newBox.style.display = newBox.style.display === "none" ? "block" : "none";
+    });
+    document.getElementById("btnCancelProject")?.addEventListener("click", () => {
+      newBox.style.display = "none";
+    });
+
+    document.getElementById("btnSaveProject")?.addEventListener("click", () => {
+      const title = document.getElementById("newProjTitle").value.trim();
+      if (!title) {
+        UI.toast("Please enter a project title", "err");
+        return;
+      }
+      const newItem = {
+        id: "proj-" + Date.now().toString(36),
+        title,
+        category: document.getElementById("newProjCat").value,
+        media: document.getElementById("newProjMedia").value.trim(),
+        metrics: document.getElementById("newProjMetrics").value.trim() || "Verified deliverable",
+        tools: document.getElementById("newProjTools").value.split(",").map((s) => s.trim()).filter(Boolean),
+        notes: document.getElementById("newProjNotes").value.trim()
+      };
+      portfolioItems.unshift(newItem);
+      renderPortfolio();
+      newBox.style.display = "none";
+      document.getElementById("newProjTitle").value = "";
+      document.getElementById("newProjMedia").value = "";
+      document.getElementById("newProjMetrics").value = "";
+      document.getElementById("newProjTools").value = "";
+      document.getElementById("newProjNotes").value = "";
+      UI.toast("New project added to portfolio!", "ok");
+    });
+  });
+})();
+</script>
+</body>
+</html>

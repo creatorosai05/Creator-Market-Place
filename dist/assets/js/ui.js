@@ -332,6 +332,7 @@ const UI = (() => {
     { href: "brief.html", label: "Post a brief", id: "brief" },
     { href: "dashboard.html", label: "My orders", id: "dashboard" },
     { href: "creator-dashboard.html", label: "Creator Studio", id: "creator-dashboard" },
+    { href: "profile.html", label: "My Profile", id: "profile" },
     { href: "insights.html", label: "Insights", id: "insights" }
   ];
 
@@ -344,10 +345,15 @@ const UI = (() => {
     if (user) {
       const displayName = profile?.name || user.user_metadata?.name || user.email?.split("@")[0] || "User";
       const role = profile?.role || user.user_metadata?.role || "brand";
+      const profileHref = role === "creator" ? "creator-profile.html" : "brand-profile.html";
+      const profileText = role === "creator" ? "Creator Profile" : "Brand Profile";
       slot.innerHTML = `
         <div class="row" style="gap:8px;align-items:center">
+          <a class="btn btn-ghost btn-sm" href="${profileHref}" style="padding:4px 9px;font-size:.78rem;color:var(--text);border-color:var(--line)" title="Manage your ${profileText}">
+            ${icon("users", 12, 2)} ${profileText}
+          </a>
           <span class="chip chip-${role === "creator" ? "mint" : "violet"}" style="padding:2px 9px;font-size:.76rem" title="${esc(user.email)}">
-            ${icon("users", 12, 2)} ${esc(displayName)} <span class="mono" style="opacity:.7">(${esc(role)})</span>
+            <span class="mono" style="opacity:.85">${esc(displayName)}</span>
           </span>
           <button class="btn btn-ghost btn-sm" id="signOutBtn" style="padding:4px 9px;font-size:.78rem" title="Sign out">${icon("logout", 13)}</button>
         </div>`;
@@ -359,8 +365,13 @@ const UI = (() => {
         }
       });
     } else {
-      slot.innerHTML = `<button class="btn btn-primary btn-sm" id="openAuthBtn" style="padding:5px 12px;font-size:.82rem">${icon("users", 13)} Sign in</button>`;
-      slot.querySelector("#openAuthBtn")?.addEventListener("click", () => openAuthModal());
+      slot.innerHTML = `
+        <div class="row" style="gap:6px;align-items:center">
+          <button class="btn btn-ghost btn-sm" id="openSignInBtn" style="padding:5px 11px;font-size:.82rem">Sign in</button>
+          <button class="btn btn-primary btn-sm" id="openSignUpBtn" style="padding:5px 13px;font-size:.82rem">Join</button>
+        </div>`;
+      slot.querySelector("#openSignInBtn")?.addEventListener("click", () => openAuthModal("signin"));
+      slot.querySelector("#openSignUpBtn")?.addEventListener("click", () => openAuthModal("signup"));
     }
   }
 
@@ -448,6 +459,14 @@ const UI = (() => {
             close();
             const host = document.getElementById("nav");
             if (host) renderAuthSlot(host);
+            const user = SupabaseBridge.getUser();
+            const prof = SupabaseBridge.getProfile();
+            const role = prof?.role || user?.user_metadata?.role || "brand";
+            if (window.location.pathname.includes("login") || window.location.pathname.includes("signup")) {
+              setTimeout(() => {
+                window.location.href = role === "creator" ? "creator-profile.html" : "brand-profile.html";
+              }, 400);
+            }
           }
         } catch (err) {
           toast(err.message || "Failed to sign in", "err");
@@ -468,10 +487,13 @@ const UI = (() => {
         try {
           if (typeof SupabaseBridge !== "undefined") {
             await SupabaseBridge.signUp({ email, password, name, role });
-            toast("Account created! Check email or sign in.", "ok");
+            toast("Account created! Redirecting to your " + (role === "creator" ? "Creator" : "Brand") + " profile...", "ok");
             close();
             const host = document.getElementById("nav");
             if (host) renderAuthSlot(host);
+            setTimeout(() => {
+              window.location.href = role === "creator" ? "creator-profile.html" : "brand-profile.html";
+            }, 500);
           }
         } catch (err) {
           toast(err.message || "Failed to create account", "err");

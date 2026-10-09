@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Profile — CreatorOS AI</title>
+<meta name="theme-color" content="#07080c">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="profile">
+<header class="nav" id="nav"></header>
+
+<main class="section-tight" style="padding-top:var(--sp-8);padding-bottom:var(--sp-8)">
+  <div class="wrap text-center" style="max-width:540px">
+    <div class="card p-6" style="border:1px solid var(--line-strong)">
+      <span class="eyebrow eyebrow-violet">CreatorOS Profile</span>
+      <h1 class="mt-2" style="font-size:1.8rem">Directing to your workspace...</h1>
+      <p class="sub mt-2 mb-4" id="roleNotice">Loading your customized role profile.</p>
+
+      <div class="grid g-3" id="rolePicker" style="display:none">
+        <a class="card p-4 card-hover text-left" href="creator-profile.html" style="border:1px solid rgba(124,92,255,0.4)">
+          <span class="chip chip-mint mb-2">Creator</span>
+          <h3 style="font-size:1.1rem">Creator Profile &amp; Portfolio</h3>
+          <p class="tiny mt-1" style="color:var(--muted)">Manage skills, AI tools, experience, hourly rates, and portfolio projects.</p>
+        </a>
+        <a class="card p-4 card-hover text-left" href="brand-profile.html" style="border:1px solid rgba(0,229,195,0.4)">
+          <span class="chip chip-violet mb-2">Brand</span>
+          <h3 style="font-size:1.1rem">Brand OS Profile</h3>
+          <p class="tiny mt-1" style="color:var(--muted)">Manage brand identity, content strategy, turnaround, budget, and billing.</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer" id="footer"></footer>
+
+<script src="assets/js/vendor/supabase.js"></script>
+<script src="assets/js/supabase.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/ai.js"></script>
+<script src="assets/js/store.js"></script>
+<script src="assets/js/ui.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  UI.mountNav("profile");
+  UI.mountFooter();
+
+  function routeUser() {
+    let role = "creator";
+    if (typeof SupabaseBridge !== "undefined") {
+      const u = SupabaseBridge.getUser();
+      const p = SupabaseBridge.getProfile();
+      if (p?.role) role = p.role;
+      else if (u?.user_metadata?.role) role = u.user_metadata.role;
+    }
+
+    if (role === "brand") {
+      window.location.replace("brand-profile.html");
+    } else if (role === "creator") {
+      window.location.replace("creator-profile.html");
+    } else {
+      document.getElementById("rolePicker").style.display = "grid";
+      document.getElementById("roleNotice").textContent = "Please select your profile view:";
+    }
+  }
+
+  setTimeout(routeUser, 150);
+});
+</script>
+</body>
+</html>

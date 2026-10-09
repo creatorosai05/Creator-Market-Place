@@ -63,27 +63,56 @@ const SupabaseBridge = (() => {
 
   async function loadProfile(userId) {
     const sb = getClient();
-    if (!sb || !userId) return null;
+    if (!userId) return null;
+    let base = {
+      id: userId,
+      name: currentUser?.user_metadata?.name || currentUser?.email?.split("@")[0] || "User",
+      role: currentUser?.user_metadata?.role || "brand",
+      verified: false
+    };
     try {
-      const { data, error } = await sb.from("profiles").select("*").eq("id", userId).maybeSingle();
-      if (!error && data) {
-        currentProfile = data;
-      } else {
-        // Fallback profile using user metadata
-        currentProfile = {
-          id: userId,
-          name: currentUser?.user_metadata?.name || currentUser?.email?.split("@")[0] || "User",
-          role: currentUser?.user_metadata?.role || "brand",
-          verified: false
-        };
+      const local = JSON.parse(localStorage.getItem("creatoros_custom_profile_" + userId) || "null");
+      if (local) base = { ...base, ...local };
+    } catch {}
+
+    if (sb) {
+      try {
+        const { data, error } = await sb.from("profiles").select("*").eq("id", userId).maybeSingle();
+        if (!error && data) {
+          base = { ...base, ...data };
+        }
+      } catch (err) {
+        console.warn("loadProfile cloud fetch notice:", err);
       }
-    } catch {
-      currentProfile = {
-        id: userId,
-        name: currentUser?.email?.split("@")[0] || "User",
-        role: "brand"
-      };
     }
+    currentProfile = base;
+    return currentProfile;
+  }
+
+  async function updateProfile(updates) {
+    const sb = getClient();
+    const userId = currentUser ? currentUser.id : "guest_user";
+    let merged = { ...(currentProfile || {}), ...updates, id: userId };
+    try {
+      localStorage.setItem("creatoros_custom_profile_" + userId, JSON.stringify(merged));
+    } catch {}
+    currentProfile = merged;
+
+    if (sb && currentUser) {
+      try {
+        const { data, error } = await sb.from("profiles").upsert({
+          id: currentUser.id,
+          updated_at: new Date().toISOString(),
+          ...updates
+        }).select().maybeSingle();
+        if (!error && data) {
+          currentProfile = { ...merged, ...data };
+        }
+      } catch (err) {
+        console.warn("Supabase profile upsert error:", err);
+      }
+    }
+    notifyAuth("PROFILE_UPDATED", currentUser, currentProfile);
     return currentProfile;
   }
 
@@ -102,6 +131,7 @@ const SupabaseBridge = (() => {
     if (error) throw error;
     currentUser = data.user;
     if (currentUser) {
+      await updateProfile({ name, role: safeRole });
       await loadProfile(currentUser.id);
       notifyAuth("SIGNED_IN", currentUser, currentProfile);
     }
@@ -294,6 +324,8 @@ const SupabaseBridge = (() => {
     signOut,
     resetPassword,
     onAuthChange,
+    updateProfile,
+    loadProfile,
     syncBrief,
     fetchCloudBriefs,
     syncOrder,
