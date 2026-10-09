@@ -365,13 +365,8 @@ const UI = (() => {
         }
       });
     } else {
-      slot.innerHTML = `
-        <div class="row" style="gap:6px;align-items:center">
-          <button class="btn btn-ghost btn-sm" id="openSignInBtn" style="padding:5px 11px;font-size:.82rem">Sign in</button>
-          <button class="btn btn-primary btn-sm" id="openSignUpBtn" style="padding:5px 13px;font-size:.82rem">Join</button>
-        </div>`;
-      slot.querySelector("#openSignInBtn")?.addEventListener("click", () => openAuthModal("signin"));
-      slot.querySelector("#openSignUpBtn")?.addEventListener("click", () => openAuthModal("signup"));
+      slot.innerHTML = `<button class="btn btn-primary btn-sm" id="openAuthBtn" style="padding:5px 14px;font-size:.82rem">${icon("users", 13)} Sign in</button>`;
+      slot.querySelector("#openAuthBtn")?.addEventListener("click", () => openAuthModal("signin"));
     }
   }
 

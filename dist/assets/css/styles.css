@@ -1776,3 +1776,274 @@ tbody tr:hover {
     max-width: none;
   }
 }
+
+/* ============================================================
+   CreatorOS AI — Fluid Motion & Micro-Animation System
+   Preserves visual layout while making all elements feel animated and responsive
+   ============================================================ */
+
+/* 1. Ambient Background Breathing */
+@keyframes ambientBreath {
+  0%, 100% {
+    transform: scale(1) translate(0, 0);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.05) translate(-12px, 8px);
+    opacity: 1;
+  }
+}
+
+body::before {
+  animation: ambientBreath 16s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* 2. Page & Content Entrance Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+main {
+  animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* 3. Surface & Card Micro-Interactions */
+.card, .stat, .creator-card, .ai-panel {
+  transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.24s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.24s ease,
+              background-color 0.24s ease;
+}
+
+.card:hover, .card-hover:hover {
+  transform: translateY(-3px);
+  border-color: rgba(124, 92, 255, 0.35);
+  box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(124, 92, 255, 0.2);
+}
+
+.stat:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0, 229, 195, 0.3);
+  box-shadow: 0 8px 24px -8px rgba(0, 229, 195, 0.25);
+}
+
+/* 4. Button Micro-Animations & Shimmer Reflection */
+.btn {
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.18s ease,
+              border-color 0.18s ease,
+              box-shadow 0.18s ease,
+              filter 0.18s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0px) scale(0.97);
+}
+
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 26px -10px rgba(124, 92, 255, 0.85);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 12px 32px -8px rgba(124, 92, 255, 0.95), 0 0 18px rgba(0, 229, 195, 0.4);
+}
+
+.btn-primary::after {
+  content: "";
+  position: absolute;
+  top: -60%;
+  left: -70%;
+  width: 45%;
+  height: 220%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.38), transparent);
+  transform: rotate(25deg);
+  animation: btnSweep 4.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  pointer-events: none;
+}
+
+@keyframes btnSweep {
+  0%, 70% {
+    transform: translateX(-150%) rotate(25deg);
+  }
+  100% {
+    transform: translateX(450%) rotate(25deg);
+  }
+}
+
+/* 5. Chips, Badges & Interactive Tags */
+.chip {
+  transition: transform 0.16s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.16s ease,
+              border-color 0.16s ease,
+              box-shadow 0.16s ease;
+}
+
+.chip:hover {
+  transform: translateY(-1.5px) scale(1.02);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.chip:active {
+  transform: translateY(0) scale(0.98);
+}
+
+@keyframes pulseGlowDot {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.95;
+    box-shadow: 0 0 0 0 rgba(0, 229, 195, 0.6);
+  }
+  50% {
+    transform: scale(1.25);
+    opacity: 0.65;
+    box-shadow: 0 0 0 4px rgba(0, 229, 195, 0);
+  }
+}
+
+.dot, .avatar-online::after {
+  animation: pulseGlowDot 2s ease-in-out infinite;
+}
+
+.badge-verified {
+  animation: badgeGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes badgeGlow {
+  0% { filter: drop-shadow(0 0 2px rgba(0, 229, 195, 0.2)); }
+  100% { filter: drop-shadow(0 0 8px rgba(0, 229, 195, 0.6)); }
+}
+
+/* 6. Form Fields Glowing Focus Aura */
+.input, .select, .textarea {
+  transition: border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.2s ease,
+              transform 0.2s ease;
+}
+
+.input:focus, .select:focus, .textarea:focus {
+  transform: translateY(-1px);
+  border-color: var(--violet);
+  box-shadow: 0 0 0 3px rgba(124, 92, 255, 0.25), 0 0 24px -4px rgba(124, 92, 255, 0.35);
+}
+
+/* 7. Score Rings & Signal Visuals */
+.score-ring svg circle[stroke="var(--mint)"] {
+  filter: drop-shadow(0 0 6px rgba(0, 229, 195, 0.45));
+}
+
+.score-bar i {
+  transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 8. Modal & Dialog Spring Animations */
+@keyframes backdropFade {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(10px);
+  }
+}
+
+@keyframes modalSpringIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -46%) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.modal-backdrop {
+  animation: backdropFade 0.22s ease-out forwards;
+}
+
+.modal {
+  animation: modalSpringIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 9. Toast Notification Pop */
+@keyframes toastSpring {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.93);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.toast {
+  animation: toastSpring 0.26s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 10. Nav Items & Brand Hover */
+.brand {
+  transition: transform 0.2s ease;
+}
+
+.brand:hover {
+  transform: translateY(-1px);
+}
+
+.brand:hover .brand-mark {
+  transform: scale(1.06) rotate(-2deg);
+  box-shadow: 0 6px 20px -2px rgba(124, 92, 255, 0.85);
+}
+
+.brand-mark {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+}
+
+.nav-links a {
+  transition: color 0.16s ease, transform 0.16s ease, background 0.16s ease;
+}
+
+.nav-links a:hover {
+  transform: translateY(-1px);
+}
+
+/* 11. Staggered Entrance for Grids */
+.grid > *:nth-child(1) { animation: fadeInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.grid > *:nth-child(2) { animation: fadeInUp 0.42s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.grid > *:nth-child(3) { animation: fadeInUp 0.48s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.grid > *:nth-child(4) { animation: fadeInUp 0.54s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.grid > *:nth-child(5) { animation: fadeInUp 0.60s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.grid > *:nth-child(6) { animation: fadeInUp 0.66s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+/* 12. Interactive Filter & Skill Toggle Chips */
+button.chip[data-tool], button.chip[data-cat], button.chip[data-fmt] {
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+button.chip[data-tool]:active, button.chip[data-cat]:active, button.chip[data-fmt]:active {
+  transform: scale(0.93);
+}
+
+/* 13. Accessibility Respect */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
