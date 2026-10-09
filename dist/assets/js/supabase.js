@@ -12,16 +12,26 @@ const SupabaseBridge = (() => {
   let currentProfile = null;
   const authListeners = [];
 
+  const DEFAULT_SUPABASE_URL = "https://rkmyzxkabtambnghtmux.supabase.co";
+  const DEFAULT_SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJrbXl6eGthYnRhbWJuZ2h0bXV4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE1NTAzNjcsImV4cCI6MjEwNzEyNjM2N30.JC5IO8w7-rlYtYwEjzATJ3iXZ2RSNhlVew94mrpFv8Y";
+
   function getClient() {
     if (client) return client;
     if (typeof window !== "undefined" && window.supabase && typeof window.supabase.createClient === "function") {
-      client = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
-        auth: {
-          persistSession: true,
-          autoRefreshToken: true,
-          detectSessionInUrl: true
-        }
-      });
+      const targetUrl = (typeof SUPABASE_URL === "string" && SUPABASE_URL.startsWith("http")) ? SUPABASE_URL : DEFAULT_SUPABASE_URL;
+      const targetKey = (typeof SUPABASE_PUBLISHABLE_KEY === "string" && !SUPABASE_PUBLISHABLE_KEY.startsWith("__")) ? SUPABASE_PUBLISHABLE_KEY : DEFAULT_SUPABASE_KEY;
+
+      try {
+        client = window.supabase.createClient(targetUrl, targetKey, {
+          auth: {
+            persistSession: true,
+            autoRefreshToken: true,
+            detectSessionInUrl: true
+          }
+        });
+      } catch (err) {
+        console.error("Supabase client creation error:", err);
+      }
     }
     return client;
   }
