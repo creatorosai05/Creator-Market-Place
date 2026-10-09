@@ -20,6 +20,7 @@ dist/assets/js/vendor/
 .next/
 out/
 creatoros-ai/.next/
+growthos-market/.next/
 
 # System files
 .DS_Store
