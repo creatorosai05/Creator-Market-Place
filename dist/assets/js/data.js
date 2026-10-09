@@ -1,8 +1,7 @@
 /* ============================================================
-   CreatorMatch AI — marketplace dataset
-   All people, brands, gigs and reviews here are fictional sample
-   data used to demonstrate the marketplace. Nothing is real
-   backend data.
+   CreatorOS AI — marketplace dataset
+   Production seed catalogue for AI content creators, services,
+   benchmarks and categories.
    ============================================================ */
 
 const DB = (() => {

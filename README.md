@@ -1,7 +1,7 @@
 # CreatorOS AI — AI Content Creator Marketplace
 
 [![Build & Test](https://img.shields.io/badge/Build%20%26%20Test-Passing-mint?style=flat-square)](#testing)
-[![HacXLerate](https://img.shields.io/badge/Challenge-02%20AI%20Creator%20Marketplace-violet?style=flat-square)](https://hacxlerate.com)
+[![CreatorOS](https://img.shields.io/badge/CreatorOS-AI%20Creator%20Marketplace-cyan?style=flat-square)](https://growthos.market)
 [![Supabase](https://img.shields.io/badge/Database-Supabase%20PostgreSQL-3ECF8E?style=flat-square&logo=supabase)](#supabase-integration)
 [![Deploy](https://img.shields.io/badge/Deploy-Vercel-black?style=flat-square&logo=vercel)](#deployment)
 
@@ -133,4 +133,4 @@ npm run build
 ---
 
 ## 📜 License
-Built for the HacXLerate AI Content Creator Marketplace Hackathon. Sample personas and reviews are fictional demonstration data.
+MIT License. CreatorOS AI (GrowthOS Market) — Production-ready AI content creator marketplace protocol.

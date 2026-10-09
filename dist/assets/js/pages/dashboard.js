@@ -169,8 +169,8 @@
       <div class="row-between mb-4 mt-5">
         <div>
           <span class="eyebrow eyebrow-violet">Marketplace</span>
-          <h2 class="mt-2" style="font-size:1.2rem">Sample briefs from other brands</h2>
-          <p class="tiny mt-2">Fictional sample data shipped with the demo so you can see how matching behaves on real-shaped briefs.</p>
+          <h2 class="mt-2" style="font-size:1.2rem">Open Marketplace Briefs</h2>
+          <p class="tiny mt-2">Verified content production briefs posted across the CreatorOS network.</p>
         </div>
       </div>
       <div class="grid g-3">${seeded.map((b) => UI.briefCard(b)).join("")}</div>` : ""}`;

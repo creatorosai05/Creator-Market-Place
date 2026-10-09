@@ -1,5 +1,5 @@
 -- CreatorOS AI — Database Schema Migration
--- HacXLerate AI Content Creator Marketplace (Challenge #02)
+-- Production AI Content Creator Marketplace Protocol
 
 -- 1. EXTENSIONS
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";

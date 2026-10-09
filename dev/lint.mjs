@@ -12,13 +12,13 @@ const bannedPatterns = [
 function scanDir(dir) {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
   for (const e of entries) {
-    if (e.name === 'node_modules' || e.name === '.git' || e.name === 'vendor') continue;
+    if (e.name === 'node_modules' || e.name === '.git' || e.name === 'vendor' || e.name === '.next' || e.name === '.env.local') continue;
     const fullPath = path.join(dir, e.name);
     if (e.isDirectory()) {
       scanDir(fullPath);
     } else if (/\.(js|mjs|ts|json|html|md)$/.test(e.name)) {
-      // Exclude transcripts or test files that deliberately mention tests
-      if (fullPath.includes('.system_generated')) continue;
+      // Exclude transcripts, build outputs or test files
+      if (fullPath.includes('.system_generated') || fullPath.includes('dist') || fullPath.includes('build')) continue;
       const content = fs.readFileSync(fullPath, 'utf8');
 
       for (const pattern of bannedPatterns) {

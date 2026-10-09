@@ -4,8 +4,8 @@
    ============================================================ */
 
 const SupabaseBridge = (() => {
-  const SUPABASE_URL = "__SUPABASE_URL__";
-  const SUPABASE_PUBLISHABLE_KEY = "__SUPABASE_PUBLISHABLE_KEY__";
+  const SUPABASE_URL = "https://rkmyzxkabtambnghtmux.supabase.co";
+  const SUPABASE_PUBLISHABLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJrbXl6eGthYnRhbWJuZ2h0bXV4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE1NTAzNjcsImV4cCI6MjEwNzEyNjM2N30.JC5IO8w7-rlYtYwEjzATJ3iXZ2RSNhlVew94mrpFv8Y";
 
   let client = null;
   let currentUser = null;

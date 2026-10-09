@@ -1,4 +1,4 @@
--- CreatorOS AI — Seed Data for Hackcelerate Marketplace
+-- CreatorOS AI — Production Seed Data for Creator Marketplace
 -- Apply after 20261009_init.sql
 
 BEGIN;

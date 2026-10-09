@@ -27,7 +27,7 @@ function arrEsc(arr) {
   return `'{${items}}'::text[]`;
 }
 
-let sql = `-- CreatorOS AI — Seed Data for Hackcelerate Marketplace
+let sql = `-- CreatorOS AI — Seed Data for Creator Marketplace
 -- Apply after 20261009_init.sql
 
 BEGIN;

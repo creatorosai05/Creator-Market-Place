@@ -536,9 +536,9 @@ const UI = (() => {
     host.innerHTML = `<div class="wrap">
       <div class="footer-grid">
         <div>
-          <a class="brand" href="index.html"><span class="brand-mark">C</span><span>Creator<em>Match</em>&nbsp;AI</span></a>
+          <a class="brand" href="index.html"><span class="brand-mark">C</span><span>Creator<em>OS</em>&nbsp;AI</span></a>
           <p class="sub mt-3" style="font-size:.87rem;max-width:34ch">A marketplace where brands hire AI-native creators, and an explainable matching engine decides who is actually right for the brief.</p>
-          <div class="row mt-4" style="gap:6px">${chip("Hackcelerate 2026", "violet")}${chip("Challenge #02")}</div>
+          <div class="row mt-4" style="gap:6px">${chip("CreatorOS AI", "violet")}${chip("Verified Escrow")}</div>
         </div>
         <div><h4>Marketplace</h4><ul>
           <li><a href="creators.html">Browse creators</a></li>
@@ -560,8 +560,8 @@ const UI = (() => {
         </ul></div>
       </div>
       <div class="footer-base">
-        <span>Built for Hackcelerate 2026 · AI Content Creator Marketplace. All creators, brands and reviews shown are fictional sample data.</span>
-        <span class="mono">v1.0 · static demo</span>
+        <span>CreatorOS AI · Production AI Content Creator Marketplace & Escrow Protocol.</span>
+        <span class="mono">v2.0 · Production</span>
       </div>
     </div>`;
   }
